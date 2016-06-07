@@ -1,6 +1,12 @@
 /**
  * Created by CutmanCometh on 6/7/16.
  */
+
+/*ANGULAR*/
+// @codekit-append "lib/angular/angular.js"
+
+
+/*PROJECT FILES*/
 // @codekit-append "app/config.js"
 
 /*CLASSES*/

@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="qatools">
     <head>
         <meta charset="UTF-8">
         <title>QA Tools</title>
     </head>
-    <body>
+    <body ng-controller="QATools as qaTools">
         <div class="container">
-
+            <h1>{{qaTools.message}}</h1>
         </div>
+        <script src="js/app-min.js"></script>
     </body>
 </html>
