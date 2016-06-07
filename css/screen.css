@@ -1,0 +1,139 @@
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/** KEYS **/
+html, body, .container {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Droid Sans Mono',monospace; }
+
+.container {
+  width: 100%; }
+
+.word-container {
+  position: absolute;
+  bottom: 140px;
+  width: 100%;
+  margin: 0;
+  font-size: 2.6em;
+  text-align: center;
+  z-index: 1;
+  font-family: 'Droid Sans Mono',monospace; }
+  .word-container .letter-box {
+    display: inline-block;
+    border-bottom: 2px solid;
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 24px;
+    margin-right: 6px; }
+    .word-container .letter-box .letter-wrapper {
+      display: block;
+      position: relative;
+      /*top:45px;*/
+      z-index: 0;
+      top: 45px;
+      color: white; }
+    .word-container .letter-box .letter-wrapper.revealed {
+      display: block;
+      animation-name: popup;
+      animation-duration: 150ms;
+      animation-timing-function: linear;
+      color: black;
+      z-index: 300;
+      top: 0px; }
+    .word-container .letter-box .letter-hider {
+      background-color: white;
+      /*rgba(100,100,100,.4);*/
+      width: 100%;
+      height: 42px;
+      position: absolute;
+      top: 1.05em;
+      z-index: 100; }
+  .word-container .letter-box:last-child {
+    margin-right: 0; }
+
+.keyboard {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 20px 0;
+  z-index: 200; }
+  .keyboard .keyboard-row {
+    margin: 0 auto;
+    padding: 0;
+    height: 38px;
+    padding-left: 2px; }
+    .keyboard .keyboard-row .keyboard-key {
+      width: 27px;
+      height: 32px;
+      margin-left: 4px;
+      padding: 0;
+      display: inline-block;
+      text-transform: uppercase;
+      border-radius: 6px;
+      background-color: #ddd;
+      color: #115;
+      text-align: center;
+      line-height: 33px;
+      border: none;
+      font-family: 'Droid Sans Mono',monospace; }
+    .keyboard .keyboard-row .keyboard-key.disabled {
+      color: #ddf;
+      background-color: #666; }
+    .keyboard .keyboard-row .keyboard-key:first-child {
+      clear: both; }
+  .keyboard .keyboard-top-row {
+    width: 320px; }
+  .keyboard .keyboard-middle-row {
+    width: 288px; }
+  .keyboard .keyboard-bottom-row {
+    width: 224px; }
+
+/*# sourceMappingURL=screen.css.map */

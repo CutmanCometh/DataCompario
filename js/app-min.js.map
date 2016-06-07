@@ -1,0 +1,1 @@
+{"version":3,"sources":["../js-src/app/classes/Foo.js"],"names":["Foo","x","y","this","prototype","product","sum"],"mappings":"AAKA,QAASA,KAAIC,EAAEC,GACXC,KAAKF,EAAIA,EACTE,KAAKD,EAAIA,EAGbF,IAAII,UAAUC,QAAU,WACpB,MAAOF,MAAKF,EAAIE,KAAKD,GAGzBF,IAAII,UAAUE,IAAM,WAChB,MAAOH,MAAKF,EAAIE,KAAKD","file":"app-min.js"}

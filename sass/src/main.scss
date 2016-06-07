@@ -1,0 +1,119 @@
+html, body, .container{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family:'Droid Sans Mono',monospace;
+}
+
+.container{
+  width: 100%;
+}
+
+.word-container{
+  position: absolute;
+  bottom: 140px;
+  width: 100%;
+  margin: 0;
+  font-size: 2.6em;
+  text-align: center;
+  z-index:1;
+  font-family:'Droid Sans Mono',monospace;
+
+  .letter-box{
+    display: inline-block;
+    border-bottom: 2px solid;
+    position:relative;
+    top:0;
+    left: 0;
+    width: 24px;
+    margin-right:6px;
+
+    .letter-wrapper{
+      display:block;
+      position:relative;
+      /*top:45px;*/
+      z-index:0;
+      top:45px;
+      color: white;
+
+    }
+
+    .letter-wrapper.revealed{
+      display: block;
+      animation-name: popup;
+      animation-duration:150ms;
+      animation-timing-function:linear;
+      color: black;
+      z-index:300;
+      top:0px;
+    }
+
+    .letter-hider{
+      background-color: white;/*rgba(100,100,100,.4);*/
+      width:100%;
+      height:42px;
+      position:absolute;
+      top:1.05em;
+      z-index:100;
+    }
+  }
+
+  .letter-box:last-child{
+    margin-right:0;
+  }
+}
+
+.keyboard{
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  padding: 0 0 20px 0;
+  z-index:200;
+
+  .keyboard-row{
+    margin: 0 auto;
+    padding: 0;
+    height: $key-height-small-screen + 6;
+    padding-left: 2px;
+
+    .keyboard-key{
+      width: $key-width-small-screen;
+      height: $key-height-small-screen;
+      margin-left: 4px;
+      padding: 0;
+      display: inline-block;
+
+      text-transform: uppercase;
+
+      border-radius: 6px;
+
+      background-color: $key-bg-color;
+      color: $key-text-color;
+
+      text-align: center;
+      line-height: $key-height-small-screen +1;
+      border: none;
+
+      font-family:'Droid Sans Mono',monospace;
+    }
+
+    .keyboard-key.disabled{
+      color: $key-disabled-text-color;
+      background-color: $key-disabled-bg-color;
+    }
+    
+    .keyboard-key:first-child{
+      clear: both;
+    }
+  }
+  .keyboard-top-row{
+    width: 320px;
+  }
+  .keyboard-middle-row{
+    width: 288px;
+  }
+  .keyboard-bottom-row{
+    width: 224px;
+  }
+}
