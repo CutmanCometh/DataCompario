@@ -10,7 +10,9 @@
 // @codekit-append "app/config.js"
 
 /*CLASSES*/
-// @codekit-append "app/classes/Foo.js"
+// @codekit-append "app/classes/DataRow.js"
+// @codekit-append "app/classes/DataMatrix.js"
+
 
 /*CONTROLLERS*/
 // @codekit-append "app/controllers/QATools.js"
