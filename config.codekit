@@ -455,6 +455,50 @@
 		"shouldRunAutoprefixer": 0,
 		"shouldRunBless": 0,
 		"useLibsass": 0
+		},
+	"\/tests\/classes\/ColumnData.test.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 1,
+		"inputAbbreviatedPath": "\/tests\/classes\/ColumnData.test.js",
+		"outputAbbreviatedPath": "\/tests\/classes\/min\/ColumnData.test-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/tests\/classes\/DataMatrix.test.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 1,
+		"inputAbbreviatedPath": "\/tests\/classes\/DataMatrix.test.js",
+		"outputAbbreviatedPath": "\/tests\/classes\/min\/DataMatrix.test-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/tests\/controllers\/QAController.test.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 1,
+		"inputAbbreviatedPath": "\/tests\/controllers\/QAController.test.js",
+		"outputAbbreviatedPath": "\/tests\/controllers\/min\/QAController.test-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/tests\/karma.conf.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/tests\/karma.conf.js",
+		"outputAbbreviatedPath": "\/tests\/min\/karma.conf-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
 		}
 	},
 "hooks": [
@@ -763,7 +807,7 @@
 			"flagValue": -1
 			},
 		"jasmine": {
-			"active": 0,
+			"active": 1,
 			"flagValue": -1
 			},
 		"jquery": {
@@ -1066,7 +1110,7 @@
 	"sassUseLibsass": 0,
 	"shouldRunAutoprefixer": 0,
 	"shouldRunBless": 0,
-	"skippedItemsString": "_cache, logs, \/tests, _logs, cache, .git, log, node_modules, .svn, .hg",
+	"skippedItemsString": "_cache, logs, _logs, cache, .git, log, node_modules, .svn, .hg",
 	"slimAutoOutputPathEnabled": 1,
 	"slimAutoOutputPathFilenamePattern": "*.html",
 	"slimAutoOutputPathRelativePath": "",

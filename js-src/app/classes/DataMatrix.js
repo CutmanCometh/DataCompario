@@ -45,11 +45,11 @@ DataMatrix.getValue = function(string){
 };
 
 DataMatrix.throwInvalidDataError = function(invalidValue, row, column){
-    throw new Error("This should NEVER happen. A cell contains data other than string, boolean, number or null data. The offending value is:\n'" + invalidValue + '\nat row ' + row + ' and column ' + column);
+    throw new Error("This should NEVER happen. A cell contains data other than string, boolean, number or null data. The offending value is:\n'" + invalidValue + "'\nat row " + row + " and column " + column);
 };
 
 DataMatrix.getColumnData = function(dataMatrix, columnNumber){
-    var columnData = new ColumnData();
+    var columnData = new ColumnData(columnNumber);
 
     var temp;
 
@@ -58,16 +58,17 @@ DataMatrix.getColumnData = function(dataMatrix, columnNumber){
         //check what type of value the cell contains
         switch(typeof temp){
             case "string":
-                columnData.containsString = true;
+                columnData.stringValues ++;
+                if(temp.length > columnData.maxStringLength){columnData.maxStringLength = temp.length;}
                 break;
             case "boolean":
-                columnData.containsBoolean = true;
+                columnData.booleanValues ++;
                 break;
             case "number":
-                columnData.containsNumber = true;
+                columnData.numberValues ++;
                 break;
             case "object":
-                if(temp===null) {columnData.containsNull = true;}
+                if(temp===null) {columnData.nullValues ++;}
                 else {DataMatrix.throwInvalidDataError(temp, i, columnNumber);}
                 break;
             default:
@@ -76,7 +77,7 @@ DataMatrix.getColumnData = function(dataMatrix, columnNumber){
         }
         //check if the value collides with any previous values
         for(var z = 0; z < i; z++){
-            if(temp === dataMatrix[z][columnNumber]) {columnData.containsUniqueData = false;}
+            if(temp === dataMatrix[z][columnNumber]) {columnData.containsUniqueValues = false;}
         }
     }
 

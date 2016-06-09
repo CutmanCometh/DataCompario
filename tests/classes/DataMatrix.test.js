@@ -2,7 +2,11 @@
  * Created by CutmanCometh on 6/8/16.
  */
 
+
+
 describe('DataMatrix class', function () {
+    //if(!DataMatrix) {var DataMatrix = {};}//so JSHint will shut up
+
     it('parses data array from data string', function () {
         var d = DataMatrix.getRowFromDataString(' this\tthat\t ');
         var e = DataMatrix.getRowFromDataString('\t \t');
@@ -44,7 +48,7 @@ describe('DataMatrix class', function () {
     it('initializes by parsing a data string', function () {
         var a = new DataMatrix("foo");
         var c = new DataMatrix("foo\nbar");
-        var b = new DataMatrix("126	Medford-Klamath Falls	3\n        98	Jacksonville-Brunswick	2\n        17	Beaumont-Port Arthur	2")
+        var b = new DataMatrix("126	Medford-Klamath Falls	3\n        98	Jacksonville-Brunswick	2\n        17	Beaumont-Port Arthur	2");
 
         expect(a).toEqual([['foo']]);
         expect(c).toEqual([
@@ -57,7 +61,7 @@ describe('DataMatrix class', function () {
             [17,"Beaumont-Port Arthur",2]
         ]);
 
-        DataMatrix.sqlNULLs = false
+        DataMatrix.sqlNULLs = false;
         var d = new DataMatrix("Distribution Center	6766	Hopkinsville	20	42240\nDISP HAMMOND LA GROC FDC      	6857	Robert	22	70455\n	7028		NULL	00000\n	WESTCHESTER	Valhalla	39	10595");
         expect(d).toEqual([
             ["Distribution Center",6766,"Hopkinsville",20,42240],
@@ -67,7 +71,7 @@ describe('DataMatrix class', function () {
         ]);
 
         DataMatrix.sqlNULLs = true;
-        var d = new DataMatrix("Distribution Center	6766	Hopkinsville	20	42240\nDISP HAMMOND LA GROC FDC      	6857	Robert	22	70455\n	7028		NULL	00000\n	WESTCHESTER	Valhalla	39	10595");
+        d = new DataMatrix("Distribution Center	6766	Hopkinsville	20	42240\nDISP HAMMOND LA GROC FDC      	6857	Robert	22	70455\n	7028		NULL	00000\n	WESTCHESTER	Valhalla	39	10595");
         expect(d).toEqual([
             ["Distribution Center",6766,"Hopkinsville",20,42240],
             ["DISP HAMMOND LA GROC FDC",6857,"Robert",22,70455],
@@ -86,6 +90,108 @@ describe('DataMatrix class', function () {
     });
     
     it('extracts metadata for columns', function () {
-        //var dataMatrix = new DataMatrix();
+
+        DataMatrix.sqlNULLs = false;
+        var d = new DataMatrix("Distribution Center	6766	Hopkinsville	20	42240\nDISP HAMMOND LA GROC FDC      	6857	Robert	22	70455\n	7028		NULL	00000\n	WESTCHESTER	Valhalla	true	10595");
+
+        expect(DataMatrix.getColumnData(d, 0).equals({
+            stringValues : 2,
+            maxStringLength : 24,
+            nullValues : 2,
+            numberValues : 0,
+            booleanValues : 0,
+            containsUniqueValues : false
+        })).toBe(true);
+
+        expect(DataMatrix.getColumnData(d, 1).equals({
+            stringValues : 1,
+            maxStringLength : 11,
+            nullValues : 0,
+            numberValues : 3,
+            booleanValues : 0,
+            containsUniqueValues : true
+        })).toBe(true);
+
+        expect(DataMatrix.getColumnData(d, 2).equals({
+            stringValues : 3,
+            maxStringLength : 12,
+            nullValues : 1,
+            numberValues : 0,
+            booleanValues : 0,
+            containsUniqueValues : true
+        })).toBe(true);
+
+        expect(DataMatrix.getColumnData(d, 3).equals({
+            stringValues : 1,
+            maxStringLength : 4,
+            nullValues : 0,
+            numberValues : 2,
+            booleanValues : 1,
+            containsUniqueValues : true
+        })).toBe(true);
+
+        expect(DataMatrix.getColumnData(d, 4).equals({
+            stringValues : 0,
+            maxStringLength : 0,
+            nullValues : 0,
+            numberValues : 4,
+            booleanValues : 0,
+            containsUniqueValues : true
+        })).toBe(true);
+
+
+
+        DataMatrix.sqlNULLs = true;
+        d = new DataMatrix("Distribution Center	6766	Hopkinsville	20	42240\nDISP HAMMOND LA GROC FDC      	6857	Robert	22	70455\n	7028		NULL	00000\n	WESTCHESTER	Valhalla	true	10595");
+        expect(DataMatrix.getColumnData(d, 3).equals({
+            stringValues : 0,
+            maxStringLength : 0,
+            nullValues : 1,
+            numberValues : 2,
+            booleanValues : 1,
+            containsUniqueValues : true
+        })).toBe(true);
+
+    });
+
+    it('sets the column number of ColumnData objects', function () {
+        var dm = new DataMatrix("\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t\n\t\t\t\t\t\t");
+
+        expect(DataMatrix.getColumnData(dm, 0).columnNumber).toEqual(0);
+        expect(DataMatrix.getColumnData(dm, 1).columnNumber).toEqual(1);
+        expect(DataMatrix.getColumnData(dm, 2).columnNumber).toEqual(2);
+        expect(DataMatrix.getColumnData(dm, 3).columnNumber).toEqual(3);
+        expect(DataMatrix.getColumnData(dm, 4).columnNumber).toEqual(4);
+        expect(DataMatrix.getColumnData(dm, 5).columnNumber).toEqual(5);
+        expect(DataMatrix.getColumnData(dm, 6).columnNumber).toEqual(6);
+
+
+        dm = new DataMatrix("foo");
+        expect(DataMatrix.getColumnData(dm, 0).columnNumber).toEqual(0);
+
+        dm = new DataMatrix("foo\tbar");
+        expect(DataMatrix.getColumnData(dm, 0).columnNumber).toEqual(0);
+        expect(DataMatrix.getColumnData(dm, 1).columnNumber).toEqual(1);
+
+        dm = new DataMatrix("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t");
+        expect(DataMatrix.getColumnData(dm, 0).columnNumber).toEqual(0);
+        expect(DataMatrix.getColumnData(dm, 1).columnNumber).toEqual(1);
+        expect(DataMatrix.getColumnData(dm, 2).columnNumber).toEqual(2);
+        expect(DataMatrix.getColumnData(dm, 3).columnNumber).toEqual(3);
+        expect(DataMatrix.getColumnData(dm, 4).columnNumber).toEqual(4);
+        expect(DataMatrix.getColumnData(dm, 5).columnNumber).toEqual(5);
+        expect(DataMatrix.getColumnData(dm, 6).columnNumber).toEqual(6);
+        expect(DataMatrix.getColumnData(dm, 7).columnNumber).toEqual(7);
+        expect(DataMatrix.getColumnData(dm, 8).columnNumber).toEqual(8);
+        expect(DataMatrix.getColumnData(dm, 9).columnNumber).toEqual(9);
+        expect(DataMatrix.getColumnData(dm, 10).columnNumber).toEqual(10);
+        expect(DataMatrix.getColumnData(dm, 11).columnNumber).toEqual(11);
+        expect(DataMatrix.getColumnData(dm, 12).columnNumber).toEqual(12);
+        expect(DataMatrix.getColumnData(dm, 13).columnNumber).toEqual(13);
+        expect(DataMatrix.getColumnData(dm, 14).columnNumber).toEqual(14);
+        expect(DataMatrix.getColumnData(dm, 15).columnNumber).toEqual(15);
+        expect(DataMatrix.getColumnData(dm, 16).columnNumber).toEqual(16);
+
+
     });
 });
