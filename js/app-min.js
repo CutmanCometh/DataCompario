@@ -34331,6 +34331,10 @@ DataMatrix.getColumnData = function(dataMatrix, columnNumber){
     return columnData;
 };
 
+//TODO should be able to compare two DataMatrix objects and get the unique id key of records that are present in one DataMatrix, but absent in the other
+//TODO should be able to compare two rows (records, whatever) in a DataMatrix, the rows having the same unique id, and identify any values that differ in the record
+//TODO handle columns headers
+
 app.controller('QATools', function(){
     var qaTools = this;
 
