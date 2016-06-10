@@ -194,4 +194,51 @@ describe('DataMatrix class', function () {
 
 
     });
+    
+    it('compares two rows for equality', function () {
+        var row1 = [1, "Bartleby", false];
+        var row2 = [2, "Buckminster", true];
+
+        expect(DataMatrix.areRowsEqual(row1, row1)).toBe(true);
+        expect(DataMatrix.areRowsEqual(row1, row1.slice())).toBe(true);
+        expect(DataMatrix.areRowsEqual(row1, row2)).toBe(false);
+        //expect(DataMatrix.areRowsEqual(, )).toBe();
+    });
+
+    it('orders rows for sorting', function () {
+        var row1 = ["foo", 1, false];
+        var row2 = ["bar", 2, false];
+        var row3 = ["baz", 3, true];
+        var row4 = ["baz", 2, true];
+
+        expect(DataMatrix.compareRows(row1, row2, 1)).toBeGreaterThan(0);
+        expect(DataMatrix.compareRows(row2, row1, 1)).toBeLessThan(0);
+        expect(DataMatrix.compareRows(row2, row3, 1)).toBeGreaterThan(0);
+        expect(DataMatrix.compareRows(row3, row1, 1)).toBeLessThan(0);
+        expect(DataMatrix.compareRows(row1, row2, 0)).toBeLessThan(0);
+        expect(DataMatrix.compareRows(row2, row3, 0)).toBeGreaterThan(0);
+        expect(DataMatrix.compareRows(row2, row4, 1)).toEqual(0);
+        expect(DataMatrix.compareRows(row3, row4, 0)).toEqual(0);
+        //expect(DataMatrix.compareRows(, , )).toBe(0);
+    });
+
+    it('compares two DataMatrix objects and spits out missing and different records', function () {
+        var dm1 = new DataMatrix("30225\tLA REGIONAL\t0020\t11000 GARDEN GROVE #201\tGARDEN GROVE\t92843\t33.8031\t-117.956218\t0\n30232\tN.CALIFORNIA REGIONAL\t0030\t2820 INDEPENDENCE DRIVE\tLIVERMORE\t94551\t37.701877\t-121.81038\t0\n30234\tLAS VEGAS\t0035\t222 S. MARTIN L. KING BLV\tLAS VEGAS\t89106\t36.17123\t-115.160835\t0");
+        var dm2 = new DataMatrix("30225\tLA REGIONAL\t0020\t11000 GARDEN GROVE #201\tGARDEN GROVE\t92843\t33.8031\t-117.956218\t0\n30232\tNorth CALIFORNIA REGIONAL\t0030\t2820 INDEPENDENCE DRIVE\tLIVERMORE\t94551\t37.701877\t-121.81038\t1\n30237\tCANOGA PARK\t0044\t21300 Roscoe Blvd\tCanoga Park\t91304\t34.21973\t-118.59507\t0");
+
+        expect(DataMatrix.compareMatrices(dm1, 0, dm2, 0)).toEqual({
+            missingFromMatrixA : [
+                [30237, "CANOGA PARK", 44, "21300 Roscoe Blvd", "Canoga Park", 91304, 34.21973, -118.59507, 0]
+            ],
+            missingFromMatrixB : [
+                [30234, "LAS VEGAS", 35, "222 S. MARTIN L. KING BLV", "LAS VEGAS", 89106, 36.17123, -115.160835, 0]
+            ],
+            difference : [
+                {
+                    a : [30232, "N.CALIFORNIA REGIONAL", 30, "2820 INDEPENDENCE DRIVE", "LIVERMORE", 94551, 37.701877, -121.81038, 0],
+                    b : [30232, "North CALIFORNIA REGIONAL", 30, "2820 INDEPENDENCE DRIVE", "LIVERMORE", 94551, 37.701877, -121.81038, 1]
+                }
+            ]
+        });
+    });
 });
