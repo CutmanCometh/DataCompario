@@ -5,9 +5,25 @@
         <title>QA Tools</title>
         <link rel="stylesheet" href="css/screen.css">
     </head>
-    <body ng-controller="QATools as qaTools">
+    <body ng-controller="DataCompare as dataCompare">
         <div class="container">
             <h1>DataCompar<sub>e</sub>io</h1>
+            <div class="leftData dataColumn">
+                <textarea class="dataTextArea" name="leftDataTextArea" id="leftDataTextArea" ng-model="dataCompare.leftDataText" ng-change="dataCompare.rebuildLeftDataMatrix(dataCompare.leftDataText)"></textarea>
+                <table>
+                    <tr ng-repeat="row in dataCompare.leftDataMatrix">
+                        <td ng-repeat="value in row">{{value}}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="rightData dataColumn">
+                <textarea class="dataTextArea" name="rightDataTextArea" id="rightDataTextArea" ng-model="dataCompare.rightDataText"></textarea>
+                <table>
+                    <tr ng-repeat="row in dataCompare.rightDataMatrix">
+                        <td ng-repeat="value in row">{{value}}</td>
+                    </tr>
+                </table>
+            </div>
         </div>
         <script src="js/app-min.js"></script>
     </body>

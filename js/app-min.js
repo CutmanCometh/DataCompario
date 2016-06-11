@@ -15,7 +15,7 @@
 // @codekit-append "app/classes/DataMatrix.js"
 
 /*CONTROLLERS*/
-// @codekit-append "app/controllers/QATools.js"
+// @codekit-append "app/controllers/DataCompare.js"
 
 /**
  * @license AngularJS v1.5.6
@@ -34423,9 +34423,9 @@ DataMatrix.compareMatrices = function(matrixA, primaryKeyColumnA, matrixB, prima
     }
 
 
-    for(b =0; b < matrixB.length; b ++){//make sure every element in matrixB is nin MatrixA
+    for(var b =0; b < matrixB.length; b ++){//make sure every element in matrixB is nin MatrixA
         rowIsPresent = false;
-        for(a = 0; a < matrixA.length; a++){
+        for(var a = 0; a < matrixA.length; a++){
             if(matrixA[a][primaryKeyColumnA] === matrixB[b][primaryKeyColumnB]){
                 rowIsPresent = true;
                 break;
@@ -34439,13 +34439,26 @@ DataMatrix.compareMatrices = function(matrixA, primaryKeyColumnA, matrixB, prima
     return result;
 };
 
-//TODO should be able to compare two DataMatrix objects and get the unique id key of records that are present in one DataMatrix, but absent in the other
-//TODO should be able to compare two rows (records, whatever) in a DataMatrix, the rows having the same unique id, and identify any values that differ in the record
 //TODO handle columns headers
 
-app.controller('QATools', function(){
-    var qaTools = this;
+app.controller('DataCompare', function(){
+    var dataCompare = this;
 
-    qaTools.message = "Go!";
+    dataCompare.leftDataText = "";
+    dataCompare.rightDataText = "";
+    
+    dataCompare.leftDataMatrix = [
+        [1, "foo", true],
+        [2, "bar", false]
+    ];
+
+    dataCompare.rebuildLeftDataMatrix = function (dataString) {
+        dataCompare.leftDataMatrix = new DataMatrix(dataString);
+    };
+
+    dataCompare.rightDataMatrix = [
+        [2, "bar", false],
+        [1, "foo", true]
+    ];
 });
 

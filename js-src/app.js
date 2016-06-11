@@ -15,4 +15,4 @@
 // @codekit-append "app/classes/DataMatrix.js"
 
 /*CONTROLLERS*/
-// @codekit-append "app/controllers/QATools.js"
+// @codekit-append "app/controllers/DataCompare.js"

@@ -177,9 +177,9 @@ DataMatrix.compareMatrices = function(matrixA, primaryKeyColumnA, matrixB, prima
     }
 
 
-    for(b =0; b < matrixB.length; b ++){//make sure every element in matrixB is nin MatrixA
+    for(var b =0; b < matrixB.length; b ++){//make sure every element in matrixB is nin MatrixA
         rowIsPresent = false;
-        for(a = 0; a < matrixA.length; a++){
+        for(var a = 0; a < matrixA.length; a++){
             if(matrixA[a][primaryKeyColumnA] === matrixB[b][primaryKeyColumnB]){
                 rowIsPresent = true;
                 break;
@@ -193,6 +193,4 @@ DataMatrix.compareMatrices = function(matrixA, primaryKeyColumnA, matrixB, prima
     return result;
 };
 
-//TODO should be able to compare two DataMatrix objects and get the unique id key of records that are present in one DataMatrix, but absent in the other
-//TODO should be able to compare two rows (records, whatever) in a DataMatrix, the rows having the same unique id, and identify any values that differ in the record
 //TODO handle columns headers

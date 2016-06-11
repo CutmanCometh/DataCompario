@@ -46,94 +46,48 @@ table {
   border-spacing: 0; }
 
 /** KEYS **/
-html, body, .container {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  font-family: 'Droid Sans Mono',monospace; }
+html, body {
+  width: 100%;
+  margin: 0; }
 
 .container {
-  width: 100%; }
-
-.word-container {
-  position: absolute;
-  bottom: 140px;
   width: 100%;
-  margin: 0;
-  font-size: 2.6em;
-  text-align: center;
-  z-index: 1;
-  font-family: 'Droid Sans Mono',monospace; }
-  .word-container .letter-box {
-    display: inline-block;
-    border-bottom: 2px solid;
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 24px;
-    margin-right: 6px; }
-    .word-container .letter-box .letter-wrapper {
-      display: block;
-      position: relative;
-      /*top:45px;*/
-      z-index: 0;
-      top: 45px;
-      color: white; }
-    .word-container .letter-box .letter-wrapper.revealed {
-      display: block;
-      animation-name: popup;
-      animation-duration: 150ms;
-      animation-timing-function: linear;
-      color: black;
-      z-index: 300;
-      top: 0px; }
-    .word-container .letter-box .letter-hider {
-      background-color: white;
-      /*rgba(100,100,100,.4);*/
-      width: 100%;
-      height: 42px;
-      position: absolute;
-      top: 1.05em;
-      z-index: 100; }
-  .word-container .letter-box:last-child {
-    margin-right: 0; }
+  margin: 0 auto;
+  padding: 0; }
 
-.keyboard {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  margin: 0;
-  padding: 0 0 20px 0;
-  z-index: 200; }
-  .keyboard .keyboard-row {
+.dataColumn {
+  width: 50%;
+  margin: 0; }
+  .dataColumn .dataTextArea {
     margin: 0 auto;
-    padding: 0;
-    height: 38px;
-    padding-left: 2px; }
-    .keyboard .keyboard-row .keyboard-key {
-      width: 27px;
-      height: 32px;
-      margin-left: 4px;
-      padding: 0;
-      display: inline-block;
-      text-transform: uppercase;
-      border-radius: 6px;
-      background-color: #ddd;
-      color: #115;
-      text-align: center;
-      line-height: 33px;
-      border: none;
-      font-family: 'Droid Sans Mono',monospace; }
-    .keyboard .keyboard-row .keyboard-key.disabled {
-      color: #ddf;
-      background-color: #666; }
-    .keyboard .keyboard-row .keyboard-key:first-child {
-      clear: both; }
-  .keyboard .keyboard-top-row {
-    width: 320px; }
-  .keyboard .keyboard-middle-row {
-    width: 288px; }
-  .keyboard .keyboard-bottom-row {
-    width: 224px; }
+    display: block;
+    width: 98%;
+    height: 130px;
+    resize: none; }
+  .dataColumn table {
+    width: 98%;
+    margin: 0 auto; }
+
+.dataColumn.leftData {
+  float: left; }
+
+.dataColumn.rightData {
+  float: right; }
+
+@media screen and (min-width: 1600px) {
+  /*.container{
+    width:1600px;
+  }
+
+  .dataColumn{
+    width: 800px;
+  }*/ }
+@media screen and (min-width: 2500px) {
+  /*.container{
+    width:2500px;
+  }
+  .dataColumn{
+    width:1250px;
+  }*/ }
 
 /*# sourceMappingURL=screen.css.map */
