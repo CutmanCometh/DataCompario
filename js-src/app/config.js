@@ -1,1 +1,1 @@
-var app = angular.module('qatools',[]);
+var app = angular.module('datacompario',[]);

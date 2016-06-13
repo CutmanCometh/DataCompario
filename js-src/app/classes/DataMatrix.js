@@ -184,7 +184,7 @@ DataMatrix.compareMatrices = function(matrixA, primaryKeyColumnA, matrixB, prima
     }
 
 
-    for(var b =0; b < matrixB.length; b ++){//make sure every element in matrixB is nin MatrixA
+    for(var b =0; b < matrixB.length; b ++){//make sure every element in matrixB is in MatrixA
         rowIsPresent = false;
         for(var a = 0; a < matrixA.length; a++){
             if(matrixA[a][primaryKeyColumnA] === matrixB[b][primaryKeyColumnB]){
