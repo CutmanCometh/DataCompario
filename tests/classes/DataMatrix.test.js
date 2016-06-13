@@ -49,7 +49,9 @@ describe('DataMatrix class', function () {
         var a = new DataMatrix("foo");
         var c = new DataMatrix("foo\nbar");
         var b = new DataMatrix("126	Medford-Klamath Falls	3\n        98	Jacksonville-Brunswick	2\n        17	Beaumont-Port Arthur	2");
+        var d = new DataMatrix("");
 
+        expect(d).toEqual([]);
         expect(a).toEqual([['foo']]);
         expect(c).toEqual([
             ['foo'],

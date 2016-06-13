@@ -14,6 +14,10 @@
 // @codekit-append "app/classes/ColumnData.js"
 // @codekit-append "app/classes/DataMatrix.js"
 
+/*SERVICES*/
+// @codekit-append "app/services/DataProcessing.js"
+
+
 /*CONTROLLERS*/
 // @codekit-append "app/controllers/DataCompare.js"
 
@@ -34250,7 +34254,8 @@ ColumnData.prototype.equals = function(anotherColumnDataObject){
 
 
 function DataMatrix(dataString){
-    var arrayOfDataStrings = dataString.split("\n");
+    if(dataString === ""){return [];}
+    var arrayOfDataStrings = dataString.split(DataMatrix.lineSeparator);
     var dataMatrix = new Array(arrayOfDataStrings.length);
 
     for(var i = 0; i < arrayOfDataStrings.length; i++){
@@ -34267,10 +34272,12 @@ DataMatrix.booleanPattern = /^(?:true|false)$/;
  * @type {boolean}
  */
 DataMatrix.sqlNULLs = true;
+DataMatrix.lineSeparator = "\n";
+DataMatrix.recordSeparator = "\t";
 
 
 DataMatrix.getRowFromDataString = function(dataString){
-    var dataArray = dataString.split("\t");
+    var dataArray = dataString.split(DataMatrix.recordSeparator);
     dataArray.forEach(function (word, index, dataArrayRef) {//fix each value as either a trimmed string or null
         dataArrayRef[index] = DataMatrix.getValue(word);
     });
@@ -34348,6 +34355,10 @@ DataMatrix.compareRows = function(rowA, rowB, uidColumnNumber){
 /**
  * Natural Sort algorithm for Javascript - Version 0.7 - Released under MIT license
  * Author: Jim Palmer (based on chunking idea from Dave Koelle)
+ * http://www.overset.com/2008/09/01/javascript-natural-sort-algorithm-with-unicode-support/
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 DataMatrix.naturalSort = function(a, b, caseSensitve) {
     var re = /(^-?[0-9]+(\.?[0-9]*)[df]?e?[0-9]?$|^0x[0-9a-f]+$|[0-9]+)/gi,
@@ -34386,7 +34397,7 @@ DataMatrix.naturalSort = function(a, b, caseSensitve) {
         if (oFxNcL > oFyNcL) return 1;
     }
     return 0;
-}
+};
 
 DataMatrix.comparisonResult = function() {
     return {
@@ -34441,8 +34452,37 @@ DataMatrix.compareMatrices = function(matrixA, primaryKeyColumnA, matrixB, prima
 
 //TODO handle columns headers
 
-app.controller('DataCompare', function(){
+/**
+ * Created by CutmanCometh on 6/10/16.
+ */
+
+app.factory('DataProcessing', ['$q', '$timeout', function ($q, $timeout) {
+    var stringToDataMatrix = function(dataString){
+        var defer = $q.defer();
+
+        //$timeout(function () {
+            defer.resolve(new DataMatrix(dataString));
+        //},2000);
+
+        return defer.promise;
+    };
+
+    return{
+        stringToDataMatrix : stringToDataMatrix
+    };
+}]);
+
+app.controller('DataCompare', ['DataProcessing',function(DataProcessing){
     var dataCompare = this;
+
+    dataCompare.processingLeftData = false;
+    dataCompare.processingRightData = false;
+
+    /**
+     * How many rows of data to show in the primary data table
+     * @type {number}
+     */
+    dataCompare.mainTableRows = 10;
 
     dataCompare.leftDataText = "";
     dataCompare.rightDataText = "";
@@ -34452,13 +34492,47 @@ app.controller('DataCompare', function(){
         [2, "bar", false]
     ];
 
-    dataCompare.rebuildLeftDataMatrix = function (dataString) {
-        dataCompare.leftDataMatrix = new DataMatrix(dataString);
-    };
-
     dataCompare.rightDataMatrix = [
         [2, "bar", false],
         [1, "foo", true]
     ];
-});
+
+    dataCompare.rebuildLeftDataMatrix = function (dataString) {
+        dataCompare.processingLeftData = true;
+        DataProcessing.stringToDataMatrix(dataString).then(function (dataMatrix) {
+            dataCompare.leftDataMatrix = dataMatrix;
+            dataCompare.processingLeftData = false;
+            //console.log("elements in leftDataMatrix: " + dataCompare.leftDataMatrix.length + "\nelements in first row: " + dataCompare.leftDataMatrix[0].length);
+        });
+    };
+
+    dataCompare.rebuildRightDataMatrix = function (dataString) {
+        dataCompare.processingRightData = true;
+        DataProcessing.stringToDataMatrix(dataString).then(function (dataMatrix) {
+            dataCompare.rightDataMatrix = dataMatrix;
+            dataCompare.processingRightData = false;
+            //console.log("elements in rightDataMatrix: " + dataCompare.rightDataMatrix.length + "\nelements in first row: " + dataCompare.rightDataMatrix[0].length);
+        });
+    };
+
+
+    dataCompare.getType = function(value){
+        var type = typeof value;
+        if(type === "number"){
+            if((value + "").indexOf(".") >= 0){
+                return "decimal";
+            }
+            else{
+                return type;
+            }
+        }
+        else {
+            return type;
+        }
+    }
+
+    //TODO column sorting
+    //TODO move business logic to a service
+    //TODO make processing asynchrous
+}]);
 

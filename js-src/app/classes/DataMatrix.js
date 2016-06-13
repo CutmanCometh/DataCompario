@@ -4,7 +4,8 @@
 
 
 function DataMatrix(dataString){
-    var arrayOfDataStrings = dataString.split("\n");
+    if(dataString === ""){return [];}
+    var arrayOfDataStrings = dataString.split(DataMatrix.lineSeparator);
     var dataMatrix = new Array(arrayOfDataStrings.length);
 
     for(var i = 0; i < arrayOfDataStrings.length; i++){
@@ -21,10 +22,12 @@ DataMatrix.booleanPattern = /^(?:true|false)$/;
  * @type {boolean}
  */
 DataMatrix.sqlNULLs = true;
+DataMatrix.lineSeparator = "\n";
+DataMatrix.recordSeparator = "\t";
 
 
 DataMatrix.getRowFromDataString = function(dataString){
-    var dataArray = dataString.split("\t");
+    var dataArray = dataString.split(DataMatrix.recordSeparator);
     dataArray.forEach(function (word, index, dataArrayRef) {//fix each value as either a trimmed string or null
         dataArrayRef[index] = DataMatrix.getValue(word);
     });
@@ -102,6 +105,10 @@ DataMatrix.compareRows = function(rowA, rowB, uidColumnNumber){
 /**
  * Natural Sort algorithm for Javascript - Version 0.7 - Released under MIT license
  * Author: Jim Palmer (based on chunking idea from Dave Koelle)
+ * http://www.overset.com/2008/09/01/javascript-natural-sort-algorithm-with-unicode-support/
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+ * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 DataMatrix.naturalSort = function(a, b, caseSensitve) {
     var re = /(^-?[0-9]+(\.?[0-9]*)[df]?e?[0-9]?$|^0x[0-9a-f]+$|[0-9]+)/gi,
@@ -140,7 +147,7 @@ DataMatrix.naturalSort = function(a, b, caseSensitve) {
         if (oFxNcL > oFyNcL) return 1;
     }
     return 0;
-}
+};
 
 DataMatrix.comparisonResult = function() {
     return {

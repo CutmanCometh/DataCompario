@@ -2,26 +2,52 @@
 <html lang="en" ng-app="qatools">
     <head>
         <meta charset="UTF-8">
-        <title>QA Tools</title>
+        <title>DataCompario</title>
         <link rel="stylesheet" href="css/screen.css">
     </head>
     <body ng-controller="DataCompare as dataCompare">
         <div class="container">
             <h1>DataCompar<sub>e</sub>io</h1>
             <div class="leftData dataColumn">
-                <textarea class="dataTextArea" name="leftDataTextArea" id="leftDataTextArea" ng-model="dataCompare.leftDataText" ng-change="dataCompare.rebuildLeftDataMatrix(dataCompare.leftDataText)"></textarea>
-                <table>
-                    <tr ng-repeat="row in dataCompare.leftDataMatrix">
-                        <td ng-repeat="value in row">{{value}}</td>
-                    </tr>
+                <textarea placeholder="Data goes in here" class="dataTextArea" name="leftDataTextArea" id="leftDataTextArea" ng-model="dataCompare.leftDataText" ng-change="dataCompare.rebuildLeftDataMatrix(dataCompare.leftDataText)"></textarea>
+                <!--TODO add user sorting by clicking table headers-->
+                <!--TODO add setting allowing user to pick how many rows to show-->
+                <table ng-show="dataCompare.leftDataMatrix.length > 0" class="leftDataTable dataTable">
+                    <thead>
+                        <tr>
+                            <th colspan="{{dataCompare.leftDataMatrix[0].length}}"><h2>All the data</h2></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="leftRow in dataCompare.leftDataMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows" ng-class="$index % 2 === 0 ? 'even' : 'odd'">
+                            <td ng-repeat="leftValue in leftRow track by $index" ng-class="dataCompare.getType(leftValue)">{{leftValue}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="{{dataCompare.leftDataMatrix[0].length}}">Showing up to {{dataCompare.mainTableRows}} out of {{dataCompare.leftDataMatrix.length}} records</th>
+                        </tr>
+                    </tfoot>
                 </table>
             </div>
             <div class="rightData dataColumn">
-                <textarea class="dataTextArea" name="rightDataTextArea" id="rightDataTextArea" ng-model="dataCompare.rightDataText"></textarea>
-                <table>
-                    <tr ng-repeat="row in dataCompare.rightDataMatrix">
-                        <td ng-repeat="value in row">{{value}}</td>
+                <textarea placeholder="Also here" class="dataTextArea" name="rightDataTextArea" id="rightDataTextArea" ng-model="dataCompare.rightDataText" ng-change="dataCompare.rebuildRightDataMatrix(dataCompare.rightDataText)"></textarea>
+                <table ng-show="dataCompare.rightDataMatrix.length > 0" class="rightDataTable dataTable">
+                    <thead>
+                    <tr>
+                        <th colspan="{{dataCompare.rightDataMatrix[0].length}}"><h2>All the data</h2></th>
                     </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="rightRow in dataCompare.rightDataMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows" ng-class="$index % 2 === 0 ? 'even' : 'odd'">
+                        <td ng-repeat="rightValue in rightRow track by $index" ng-class="dataCompare.getType(rightValue)">{{rightValue}}</td>
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="{{dataCompare.rightDataMatrix[0].length}}">Showing up to {{dataCompare.mainTableRows}} out of {{dataCompare.rightDataMatrix.length}} records</th>
+                    </tr>
+                    </tfoot>
                 </table>
             </div>
         </div>

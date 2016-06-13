@@ -50,23 +50,62 @@ html, body {
   width: 100%;
   margin: 0; }
 
+h1 {
+  font-size: 4em;
+  text-align: center;
+  padding-bottom: 40px; }
+  h1 sub {
+    font-size: .75em;
+    display: inline-block;
+    width: 5px;
+    position: relative;
+    top: .42em;
+    left: -.23em;
+    /*background-image: url("../images/up-caret.svg");
+    background-repeat: no-repeat;
+    background-position: 500px, 500px;*/ }
+
 .container {
   width: 100%;
   margin: 0 auto;
   padding: 0; }
 
+.dataTable {
+  margin: 20px auto 0 auto;
+  transition: all linear 5.0s;
+  width: 95%; }
+  .dataTable tr.even {
+    background-color: #f8f8f8; }
+  .dataTable tr.odd {
+    background-color: #fff; }
+  .dataTable td {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    padding: 4px 3px 0px 5px;
+    vertical-align: middle; }
+  .dataTable td.number {
+    color: #181;
+    text-align: right; }
+  .dataTable td.decimal {
+    color: #181;
+    text-align: left; }
+  .dataTable td.boolean {
+    color: #11e;
+    text-align: center; }
+  .dataTable td.string {
+    color: #622; }
+
+/*.dataTable.ng-hide{
+  opacity:0;
+}*/
 .dataColumn {
   width: 50%;
   margin: 0; }
   .dataColumn .dataTextArea {
     margin: 0 auto;
     display: block;
-    width: 98%;
+    width: 99.5%;
     height: 130px;
     resize: none; }
-  .dataColumn table {
-    width: 98%;
-    margin: 0 auto; }
 
 .dataColumn.leftData {
   float: left; }

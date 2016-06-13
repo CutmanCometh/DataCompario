@@ -3,11 +3,70 @@ html, body{
   margin:0;
 }
 
+h1 {
+  font-size:4em;
+  text-align: center;
+  padding-bottom:40px;
+  sub{
+    font-size: .75em;
+    display: inline-block;
+    width:5px;
+    position: relative;
+    top: .42em;
+    left: -.23em;
+    /*background-image: url("../images/up-caret.svg");
+    background-repeat: no-repeat;
+    background-position: 500px, 500px;*/
+  }
+}
+
 .container{
   width: 100%;
   margin: 0 auto;
   padding:0;
 }
+
+.dataTable{
+  margin: 20px auto 0 auto;
+  transition: all linear 5.0s;
+  width:95%;
+
+  tr.even{
+    background-color: $color-even-rows;
+  }
+
+  tr.odd{
+    background-color: $color-odd-rows;
+  }
+
+  td{
+    border: 1px solid rgba(0,0,0,.2);
+    padding: 4px 3px 0px 5px;
+    vertical-align: middle;
+  }
+
+  td.number{
+    color: $color-number-value;
+    text-align: right;
+  }
+
+  td.decimal{
+    color: $color-number-value;
+    text-align: left;
+  }
+
+  td.boolean{
+    color: $color-boolean-value;
+    text-align: center;
+  }
+
+  td.string{
+    color: $color-string-value;
+  }
+}
+/*.dataTable.ng-hide{
+  opacity:0;
+}*///TODO animate the data tables in an out
 
 .dataColumn{
   width: 50%;
@@ -16,14 +75,9 @@ html, body{
   .dataTextArea{
     margin: 0 auto;
     display: block;
-    width: 98%;
+    width: 99.5%;
     height:130px;
     resize: none;
-  }
-
-  table{
-    width: 98%;
-    margin: 0 auto;
   }
 }
 

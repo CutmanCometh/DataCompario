@@ -14,5 +14,9 @@
 // @codekit-append "app/classes/ColumnData.js"
 // @codekit-append "app/classes/DataMatrix.js"
 
+/*SERVICES*/
+// @codekit-append "app/services/DataProcessing.js"
+
+
 /*CONTROLLERS*/
 // @codekit-append "app/controllers/DataCompare.js"
