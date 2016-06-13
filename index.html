@@ -12,6 +12,43 @@
                 <textarea placeholder="Data goes in here" class="dataTextArea" name="leftDataTextArea" id="leftDataTextArea" ng-model="dataCompare.leftDataText" ng-change="dataCompare.rebuildLeftDataMatrix(dataCompare.leftDataText)"></textarea>
                 <!--TODO add user sorting by clicking table headers-->
                 <!--TODO add setting allowing user to pick how many rows to show-->
+
+                <table class="dataTable" ng-show="dataCompare.leftCompareMatrix.length > 0" >
+                    <thead>
+                        <tr>
+                            <th colspan="{{dataCompare.leftCompareMatrix[0].length}}">Rows that have different values</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="leftCompareRow in dataCompare.leftCompareMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows" ng-class="$index % 2 === 0 ? 'even' : 'odd'">
+                            <td ng-repeat="leftCompareValue in leftCompareRow track by $index" ng-class="dataCompare.getType(leftCompareValue)">{{leftCompareValue}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="{{dataCompare.leftCompareMatrix[0].length}}">Showing up to {{dataCompare.mainTableRows}} out of {{dataCompare.leftCompareMatrix.length}} records</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <table class="dataTable" ng-show="dataCompare.leftMissingMatrix.length > 0" >
+                    <thead>
+                        <tr>
+                            <th colspan="{{dataCompare.leftMissingMatrix[0].length}}">Rows that are present in this dataset, but absent in the other</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="leftMissingRow in dataCompare.leftMissingMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows" ng-class="$index % 2 === 0 ? 'even' : 'odd'">
+                            <td ng-repeat="leftMissingValue in leftMissingRow track by $index" ng-class="dataCompare.getType(leftMissingValue)">{{leftMissingValue}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <th colspan="{{dataCompare.leftMissingMatrix[0].length}}">Showing up to {{dataCompare.mainTableRows}} out of {{dataCompare.leftMissingMatrix.length}} records</th>
+                    </tr>
+                    </tfoot>
+                </table>
+
                 <table ng-show="dataCompare.leftDataMatrix.length > 0" class="leftDataTable dataTable">
                     <thead>
                         <tr>
@@ -32,6 +69,43 @@
             </div>
             <div class="rightData dataColumn">
                 <textarea placeholder="Also here" class="dataTextArea" name="rightDataTextArea" id="rightDataTextArea" ng-model="dataCompare.rightDataText" ng-change="dataCompare.rebuildRightDataMatrix(dataCompare.rightDataText)"></textarea>
+
+                <table class="dataTable" ng-show="dataCompare.rightCompareMatrix.length > 0" >
+                    <thead>
+                        <tr>
+                            <th colspan="{{dataCompare.rightCompareMatrix[0].length}}">Rows that have different values</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="rightCompareRow in dataCompare.rightCompareMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows" ng-class="$index % 2 === 0 ? 'even' : 'odd'">
+                            <td ng-repeat="rightCompareValue in rightCompareRow track by $index" ng-class="dataCompare.getType(rightCompareValue)">{{rightCompareValue}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="{{dataCompare.rightCompareMatrix[0].length}}">Showing up to {{dataCompare.mainTableRows}} out of {{dataCompare.rightCompareMatrix.length}} records</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
+                <table class="dataTable" ng-show="dataCompare.rightMissingMatrix.length > 0" >
+                    <thead>
+                        <tr>
+                            <th colspan="{{dataCompare.rightMissingMatrix[0].length}}">Rows that are present in this dataset, but absent in the other</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="rightMissingRow in dataCompare.rightMissingMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows" ng-class="$index % 2 === 0 ? 'even' : 'odd'">
+                            <td ng-repeat="rightMissingValue in rightMissingRow track by $index" ng-class="dataCompare.getType(rightMissingValue)">{{rightMissingValue}}</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th colspan="{{dataCompare.rightMissingMatrix[0].length}}">Showing up to {{dataCompare.mainTableRows}} out of {{dataCompare.rightMissingMatrix.length}} records</th>
+                        </tr>
+                    </tfoot>
+                </table>
+
                 <table ng-show="dataCompare.rightDataMatrix.length > 0" class="rightDataTable dataTable">
                     <thead>
                     <tr>
@@ -49,6 +123,7 @@
                     </tr>
                     </tfoot>
                 </table>
+
             </div>
         </div>
         <script src="js/app-min.js"></script>

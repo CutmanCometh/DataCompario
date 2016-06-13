@@ -2,21 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e6790192-1e84-4880-9a47-d593dda5bf32" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/.sass-cache/55b6fd84496cf691b66585c5bd84fc1531acc21f/main.scssc" afterPath="$PROJECT_DIR$/sass/.sass-cache/55b6fd84496cf691b66585c5bd84fc1531acc21f/main.scssc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/.sass-cache/55b6fd84496cf691b66585c5bd84fc1531acc21f/static.scssc" afterPath="$PROJECT_DIR$/sass/.sass-cache/55b6fd84496cf691b66585c5bd84fc1531acc21f/static.scssc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config.codekit" afterPath="$PROJECT_DIR$/config.codekit" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/screen.css" afterPath="$PROJECT_DIR$/css/screen.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/css/screen.css.map" afterPath="$PROJECT_DIR$/css/screen.css.map" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js-src/app.js" afterPath="$PROJECT_DIR$/js-src/app.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js-src/app/classes/DataMatrix.js" afterPath="$PROJECT_DIR$/js-src/app/classes/DataMatrix.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js-src/app/controllers/DataCompare.js" afterPath="$PROJECT_DIR$/js-src/app/controllers/DataCompare.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js-src/app/services/DataProcessing.js" afterPath="$PROJECT_DIR$/js-src/app/services/DataProcessing.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/js/app-min.js" afterPath="$PROJECT_DIR$/js/app-min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/src/main.scss" afterPath="$PROJECT_DIR$/sass/src/main.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/sass/src/static.scss" afterPath="$PROJECT_DIR$/sass/src/static.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/tests/classes/DataMatrix.test.js" afterPath="$PROJECT_DIR$/tests/classes/DataMatrix.test.js" />
     </list>
     <ignored path="QATools.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,8 +70,8 @@
       <file leaf-file-name="DataProcessing.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js-src/app/services/DataProcessing.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+            <state relative-caret-position="378">
+              <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
               <folding>
                 <element signature="e#0#46#0" expanded="false" />
               </folding>
@@ -92,8 +82,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="703">
-              <caret line="41" column="170" selection-start-line="41" selection-start-column="170" selection-end-line="41" selection-end-column="170" />
+            <state relative-caret-position="208">
+              <caret line="93" column="76" selection-start-line="93" selection-start-column="76" selection-end-line="93" selection-end-column="76" />
               <folding />
             </state>
           </provider>
@@ -102,8 +92,8 @@
       <file leaf-file-name="DataCompare.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js-src/app/controllers/DataCompare.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+            <state relative-caret-position="588">
+              <caret line="64" column="61" selection-start-line="64" selection-start-column="61" selection-end-line="64" selection-end-column="61" />
               <folding />
             </state>
           </provider>
@@ -112,8 +102,8 @@
       <file leaf-file-name="DataMatrix.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/js-src/app/classes/DataMatrix.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="462">
-              <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
+            <state relative-caret-position="202">
+              <caret line="165" column="0" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
               <folding>
                 <element signature="n#!!doc;n#DataMatrix#0" expanded="false" />
                 <element signature="e#470#625#0" expanded="false" />
@@ -125,7 +115,7 @@
       <file leaf-file-name="DataMatrix.test.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tests/classes/DataMatrix.test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
+            <state relative-caret-position="-3383">
               <caret line="48" column="38" selection-start-line="48" selection-start-column="38" selection-end-line="48" selection-end-column="38" />
               <folding>
                 <element signature="e#0#45#0" expanded="false" />
@@ -179,12 +169,12 @@
         <option value="$PROJECT_DIR$/sass/src/hugescreen.scss" />
         <option value="$PROJECT_DIR$/sass/src/bigscreen.scss" />
         <option value="$PROJECT_DIR$/js-src/app.js" />
-        <option value="$PROJECT_DIR$/js-src/app/services/DataProcessing.js" />
         <option value="$PROJECT_DIR$/tests/classes/DataMatrix.test.js" />
-        <option value="$PROJECT_DIR$/js-src/app/classes/DataMatrix.js" />
         <option value="$PROJECT_DIR$/sass/src/main.scss" />
         <option value="$PROJECT_DIR$/sass/src/static.scss" />
         <option value="$PROJECT_DIR$/js-src/app/controllers/DataCompare.js" />
+        <option value="$PROJECT_DIR$/js-src/app/classes/DataMatrix.js" />
+        <option value="$PROJECT_DIR$/js-src/app/services/DataProcessing.js" />
         <option value="$PROJECT_DIR$/index.html" />
       </list>
     </option>
@@ -535,12 +525,12 @@
       <workItem from="1465604184606" duration="6088000" />
       <workItem from="1465830571150" duration="471000" />
       <workItem from="1465832821669" duration="211000" />
-      <workItem from="1465842707678" duration="6940000" />
+      <workItem from="1465842707678" duration="9641000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="58165000" />
+    <option name="totallyTimeSpent" value="60866000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1921" y="428" width="1920" height="990" extended-state="6" />
@@ -905,32 +895,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js-src/app/classes/DataMatrix.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc;n#DataMatrix#0" expanded="false" />
-            <element signature="e#470#625#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sass/screen.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="84">
           <caret line="4" column="25" selection-start-line="4" selection-start-column="25" selection-end-line="4" selection-end-column="25" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/classes/DataMatrix.test.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="48" column="38" selection-start-line="48" selection-start-column="38" selection-end-line="48" selection-end-column="38" />
-          <folding>
-            <element signature="e#0#45#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -950,28 +919,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/js-src/app/services/DataProcessing.js">
+    <entry file="file://$PROJECT_DIR$/tests/classes/DataMatrix.test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
+        <state relative-caret-position="-3383">
+          <caret line="48" column="38" selection-start-line="48" selection-start-column="38" selection-end-line="48" selection-end-column="38" />
           <folding>
-            <element signature="e#0#46#0" expanded="false" />
+            <element signature="e#0#45#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/js-src/app/controllers/DataCompare.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
+        <state relative-caret-position="588">
+          <caret line="64" column="61" selection-start-line="64" selection-start-column="61" selection-end-line="64" selection-end-column="61" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js-src/app/classes/DataMatrix.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="165" column="0" selection-start-line="165" selection-start-column="0" selection-end-line="165" selection-end-column="0" />
+          <folding>
+            <element signature="n#!!doc;n#DataMatrix#0" expanded="false" />
+            <element signature="e#470#625#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/js-src/app/services/DataProcessing.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="20" column="13" selection-start-line="20" selection-start-column="13" selection-end-line="20" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#46#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="703">
-          <caret line="41" column="170" selection-start-line="41" selection-start-column="170" selection-end-line="41" selection-end-column="170" />
+        <state relative-caret-position="208">
+          <caret line="93" column="76" selection-start-line="93" selection-start-column="76" selection-end-line="93" selection-end-column="76" />
           <folding />
         </state>
       </provider>

@@ -34460,15 +34460,26 @@ app.factory('DataProcessing', ['$q', '$timeout', function ($q, $timeout) {
     var stringToDataMatrix = function(dataString){
         var defer = $q.defer();
 
-        //$timeout(function () {
+        $timeout(function () {
             defer.resolve(new DataMatrix(dataString));
-        //},2000);
+        },1);
+
+        return defer.promise;
+    };
+
+    var compareMatrices = function(matrixA, matrixB){
+        var defer = $q.defer();
+
+        $timeout(function () {
+            defer.resolve(DataMatrix.compareMatrices(matrixA, 0, matrixB, 0));//TODO for now we are only doing comparisons based on the primary key being the first column. need to add support for the user choosing the unique column, and for not having a primaru key at all
+        },1);
 
         return defer.promise;
     };
 
     return{
-        stringToDataMatrix : stringToDataMatrix
+        stringToDataMatrix : stringToDataMatrix,
+        compareMatrices : compareMatrices
     };
 }]);
 
@@ -34488,14 +34499,20 @@ app.controller('DataCompare', ['DataProcessing',function(DataProcessing){
     dataCompare.rightDataText = "";
     
     dataCompare.leftDataMatrix = [
-        [1, "foo", true],
+        /*[1, "foo", true],
         [2, "bar", false]
     ];
 
     dataCompare.rightDataMatrix = [
-        [2, "bar", false],
-        [1, "foo", true]
+        /*[2, "bar", false],
+        [1, "foo", true]*/
     ];
+    
+    dataCompare.leftCompareMatrix = [];
+    dataCompare.rightCompareMatrix = [];
+    
+    dataCompare.leftMissingMatrix = [];
+    dataCompare.rightMissingMatrix = [];
 
     dataCompare.rebuildLeftDataMatrix = function (dataString) {
         dataCompare.processingLeftData = true;
@@ -34511,8 +34528,44 @@ app.controller('DataCompare', ['DataProcessing',function(DataProcessing){
         DataProcessing.stringToDataMatrix(dataString).then(function (dataMatrix) {
             dataCompare.rightDataMatrix = dataMatrix;
             dataCompare.processingRightData = false;
+            
+            if(dataCompare.leftDataMatrix.length > 0 && dataCompare.rightDataMatrix.length > 0){
+                dataCompare.compareMatrices();
+            }
+            else {
+                dataCompare.clearComparisonData();
+            }
             //console.log("elements in rightDataMatrix: " + dataCompare.rightDataMatrix.length + "\nelements in first row: " + dataCompare.rightDataMatrix[0].length);
         });
+    };
+    
+    dataCompare.compareMatrices = function () {
+        DataProcessing.compareMatrices(dataCompare.leftDataMatrix, dataCompare.rightDataMatrix).then(function (comparison) {
+            var leftMissing = comparison.missingFromMatrixB;
+            var rightMissing = comparison.missingFromMatrixA;
+            var leftCompare = [];
+            var rightCompare = [];
+
+            for(var i = 0; i < comparison.difference.length; i++){
+                leftCompare.push(comparison.difference[i].a);
+                rightCompare.push(comparison.difference[i].b);
+            }
+
+            dataCompare.leftCompareMatrix = leftCompare;
+            dataCompare.rightCompareMatrix = rightCompare;
+
+            dataCompare.leftMissingMatrix = leftMissing;
+            dataCompare.rightMissingMatrix = rightMissing;
+        });
+
+
+    };
+    
+    dataCompare.clearComparisonData = function () {
+        dataCompare.leftCompareMatrix = [];
+        dataCompare.rightCompareMatrix = [];
+        dataCompare.leftMissingMatrix = [];
+        dataCompare.rightMissingMatrix = [];
     };
 
 
