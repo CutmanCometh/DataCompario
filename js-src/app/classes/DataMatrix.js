@@ -170,9 +170,11 @@ DataMatrix.compareMatrices = function(matrixA, primaryKeyColumnA, matrixB, prima
             if(matrixA[a][primaryKeyColumnA] === matrixB[b][primaryKeyColumnB]){//same primary key. TODO this is a horribly inneficient way to search for the same uid
                 rowIsPresent = true;
                 if(!DataMatrix.areRowsEqual(matrixA[a], matrixB[b])){
+
                     result.difference.push({
                         a : matrixA[a],
-                        b : matrixB[b]
+                        b : matrixB[b],
+                        d : DataMatrix.getRowDifferenceMask(matrixA[a], matrixB[b])
                     });
                 }
                 break;// no need to continue inner loop
@@ -199,5 +201,21 @@ DataMatrix.compareMatrices = function(matrixA, primaryKeyColumnA, matrixB, prima
 
     return result;
 };
+
+DataMatrix.getRowDifferenceMask = function (rowA, rowB) {
+    if(rowA.length !== rowB.length){
+        throw new Error("DataMatrix.getRowDifferenceMask can only compare rows containing the same number of values");
+    }
+    var difference = new Array(rowA.length);
+    for(var i = 0; i < rowA.length; i++){
+        if(rowA[i] !== rowB[i]){
+            difference[i] = true;
+        }
+        else{
+            difference[i] = false;
+        }
+    }
+    return difference
+}
 
 //TODO handle columns headers

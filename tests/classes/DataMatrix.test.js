@@ -238,9 +238,25 @@ describe('DataMatrix class', function () {
             difference : [
                 {
                     a : [30232, "N.CALIFORNIA REGIONAL", 30, "2820 INDEPENDENCE DRIVE", "LIVERMORE", 94551, 37.701877, -121.81038, 0],
-                    b : [30232, "North CALIFORNIA REGIONAL", 30, "2820 INDEPENDENCE DRIVE", "LIVERMORE", 94551, 37.701877, -121.81038, 1]
+                    b : [30232, "North CALIFORNIA REGIONAL", 30, "2820 INDEPENDENCE DRIVE", "LIVERMORE", 94551, 37.701877, -121.81038, 1],
+                    d : [false, true, false, false, false, false, false, false, true]
                 }
             ]
         });
+    });
+
+    it('builds an array containing the difference between two rows', function () {
+        var row1 = [1, "foo", true, "banana"];
+        var row2 = [2, "foo", false, "apple"];
+        var row3 = [1, "bar", false, "orange"];
+        var row4 = [2, "bar", true, "papaya"];
+
+        expect(function(){DataMatrix.getRowDifferenceMask(row1, [true,false])}).toThrow(new Error("DataMatrix.getRowDifferenceMask can only compare rows containing the same number of values"));
+
+        expect(DataMatrix.getRowDifferenceMask(row1, row2)).toEqual([true, false, true, true]);
+        expect(DataMatrix.getRowDifferenceMask(row2, row3)).toEqual([true,true,false,true]);
+        expect(DataMatrix.getRowDifferenceMask(row3, row4)).toEqual([true,false,true,true]);
+        expect(DataMatrix.getRowDifferenceMask(row1, row4)).toEqual([true,true,false,true]);
+        expect(DataMatrix.getRowDifferenceMask(row1, row1)).toEqual([false,false,false,false]);
     });
 });

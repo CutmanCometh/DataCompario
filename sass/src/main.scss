@@ -7,7 +7,7 @@ html, body{
 h1 {
   font-size:4em;
   text-align: center;
-  padding-bottom:40px;
+  padding-bottom:30px;
   sub{
     font-size: .75em;
     display: inline-block;
@@ -21,6 +21,21 @@ h1 {
   }
 }
 
+h2{
+  font-size: 2em;
+  text-align: center;
+}
+
+div.intro{
+  width: 600px;
+  margin: 30px auto;
+
+  li{
+    list-style-type: circle;
+    padding-top: 4px;
+  }
+}
+
 .container{
   width: 100%;
   margin: 0 auto;
@@ -31,6 +46,8 @@ h1 {
   margin: 40px auto 0 auto;
   transition: all linear 5.0s;
   width:95%;
+  max-width: 95%;
+  overflow: hidden;
   padding: 0 10px;
 
   tr.even{
@@ -45,6 +62,7 @@ h1 {
     border: $border-table;
     padding: 4px 3px 0px 5px;
     vertical-align: middle;
+    overflow: hidden;
   }
 
   td.number{
@@ -65,6 +83,10 @@ h1 {
   td.string{
     color: $color-string-value;
   }
+
+  td.different{
+    border: $border-different-cell-values;
+  }
 }
 
 thead, tfoot{
@@ -83,6 +105,8 @@ thead{
 
 .dataColumn{
   width: 49%;
+  //max-width: 49%;
+  //overflow: hidden;
   /*margin: 0;*/
 
 

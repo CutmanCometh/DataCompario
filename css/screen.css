@@ -54,7 +54,7 @@ html, body {
 h1 {
   font-size: 4em;
   text-align: center;
-  padding-bottom: 40px; }
+  padding-bottom: 30px; }
   h1 sub {
     font-size: .75em;
     display: inline-block;
@@ -66,6 +66,17 @@ h1 {
     background-repeat: no-repeat;
     background-position: 500px, 500px;*/ }
 
+h2 {
+  font-size: 2em;
+  text-align: center; }
+
+div.intro {
+  width: 600px;
+  margin: 30px auto; }
+  div.intro li {
+    list-style-type: circle;
+    padding-top: 4px; }
+
 .container {
   width: 100%;
   margin: 0 auto;
@@ -75,6 +86,8 @@ h1 {
   margin: 40px auto 0 auto;
   transition: all linear 5.0s;
   width: 95%;
+  max-width: 95%;
+  overflow: hidden;
   padding: 0 10px; }
   .dataTable tr.even {
     background-color: #eee; }
@@ -83,7 +96,8 @@ h1 {
   .dataTable td {
     border: 1px solid rgba(0, 0, 0, 0.2);
     padding: 4px 3px 0px 5px;
-    vertical-align: middle; }
+    vertical-align: middle;
+    overflow: hidden; }
   .dataTable td.number {
     color: #181;
     text-align: right; }
@@ -95,6 +109,8 @@ h1 {
     text-align: center; }
   .dataTable td.string {
     color: #622; }
+  .dataTable td.different {
+    border: 2px solid red; }
 
 thead th, tfoot th {
   padding: 5px;

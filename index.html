@@ -8,37 +8,48 @@
     <body ng-controller="DataCompare as dataCompare">
         <div class="container">
             <h1>DataCompar<sub>e</sub>io</h1>
+            <h2>A simple tool for comparing two similar datasets to find discrepancies</h2>
+            <div class="intro">A few constraints on your data (we're working on fixes and UX improvements):
+                <ul>
+                    <li class="li">You must have a unique identifier, and it must be in the first column.</li>
+                    <li class="li">Both datasets must have the same number of columns in each and every row.</li>
+                    <li class="li">The columns have to be in the same order, or else the comparison won't work.</li>
+                    <li class="li">Rows must be separated by a newline (unix or windows, doesn't matter), and values
+                        within a row should be separated by tabs.
+                    </li>
+                </ul>
+            </div>
 
             <!--TODO add user sorting by clicking table headers-->
             <!--TODO add setting allowing user to pick how many rows to show-->
 
             <div class="leftData dataColumn">
 
-            <textarea placeholder="Data goes in here" class="dataTextArea" name="leftDataTextArea"
-                      id="leftDataTextArea" ng-model="dataCompare.leftDataText"
-                      ng-change="dataCompare.rebuildLeftDataMatrix(dataCompare.leftDataText)"></textarea>
-
+                <textarea placeholder="Data goes in here" class="dataTextArea" name="leftDataTextArea"
+                          id="leftDataTextArea" ng-model="dataCompare.leftDataText"
+                          ng-change="dataCompare.rebuildLeftDataMatrix(dataCompare.leftDataText)"></textarea>
 
                 <table class="dataTable"
-                       ng-show="dataCompare.leftCompareMatrix.length > 0 || dataCompare.rightCompareMatrix.length > 0">
+                       ng-show="dataCompare.compareMatrix.length > 0">
                     <thead>
                         <tr>
-                            <th colspan="{{dataCompare.leftCompareMatrix[0].length}}">Rows that have different values
+                            <th colspan="{{dataCompare.compareMatrix[0].a.length}}">Rows that have different values
                             </th>
                         </tr>
                     </thead>
                     <tbody id="leftCompareBody">
-                        <tr ng-repeat="leftCompareRow in dataCompare.leftCompareMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows"
-                            ng-class="$index % 2 === 0 ? 'even' : 'odd'">
-                            <td ng-repeat="leftCompareValue in leftCompareRow track by $index"
-                                ng-class="dataCompare.getType(leftCompareValue)">{{leftCompareValue}}
+                        <tr ng-repeat="compareRow in dataCompare.compareMatrix | limitTo: dataCompare.mainTableRows"
+                            ng-class="$index % 2 === 0 ? 'even' : 'odd'"><!--TODO add custom sorting function for compare rows-->
+                            <td ng-repeat="leftCompareValue in compareRow.a track by $index"
+                                class="{{dataCompare.getType(leftCompareValue)}} ng-class: {'different' : compareRow.d[$index]}">
+                                {{leftCompareValue}}
                             </td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="{{dataCompare.leftCompareMatrix[0].length}}">Showing up to
-                                {{dataCompare.mainTableRows}} out of {{dataCompare.leftCompareMatrix.length}} records.
+                            <th colspan="{{dataCompare.compareMatrix[0].a.length}}">Showing up to
+                                {{dataCompare.mainTableRows}} out of {{dataCompare.compareMatrix.length}} records.
                                 <button class="clipboard" data-clipboard-action="copy"
                                         data-clipboard-target="#leftCompareBody">Copy them <em>all</em> to the clipboard
                                 </button>
@@ -113,25 +124,26 @@
                           ng-change="dataCompare.rebuildRightDataMatrix(dataCompare.rightDataText)"></textarea>
 
                 <table class="dataTable"
-                       ng-show="dataCompare.leftCompareMatrix.length > 0 || dataCompare.rightCompareMatrix.length > 0">
+                       ng-show="dataCompare.compareMatrix.length > 0">
                     <thead>
                         <tr>
-                            <th colspan="{{dataCompare.rightCompareMatrix[0].length}}">Rows that have different values
+                            <th colspan="{{dataCompare.compareMatrix[0].a.length}}">Rows that have different values
                             </th>
                         </tr>
                     </thead>
                     <tbody id="rightCompareBody">
-                        <tr ng-repeat="rightCompareRow in dataCompare.rightCompareMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows"
+                        <tr ng-repeat="compareRow in dataCompare.compareMatrix | limitTo: dataCompare.mainTableRows"
                             ng-class="$index % 2 === 0 ? 'even' : 'odd'">
-                            <td ng-repeat="rightCompareValue in rightCompareRow track by $index"
-                                ng-class="dataCompare.getType(rightCompareValue)">{{rightCompareValue}}
+                            <td ng-repeat="rightCompareValue in compareRow.b track by $index"
+                                class="{{dataCompare.getType(rightCompareValue)}} ng-class: {'different' : compareRow.d[$index]}">
+                                {{rightCompareValue}}
                             </td>
                         </tr>
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th colspan="{{dataCompare.rightCompareMatrix[0].length}}">Showing up to
-                                {{dataCompare.mainTableRows}} out of {{dataCompare.rightCompareMatrix.length}} records
+                            <th colspan="{{dataCompare.compareMatrix[0].a.length}}">Showing up to
+                                {{dataCompare.mainTableRows}} out of {{dataCompare.compareMatrix.length}} records
                                 <button class="clipboard" data-clipboard-target="#rightCompareBody">Copy them
                                     <em>all</em> to the clipboard
                                 </button>
@@ -196,5 +208,15 @@
 
         </div>
         <script src="js/app-min.js"></script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-37551661-5', 'auto');
+            ga('send', 'pageview');
+
+        </script>
     </body>
 </html>

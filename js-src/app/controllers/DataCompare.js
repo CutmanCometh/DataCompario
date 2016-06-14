@@ -23,8 +23,10 @@ app.controller('DataCompare', ['DataProcessing',function(DataProcessing){
         [1, "foo", true]*/
     ];
     
-    dataCompare.leftCompareMatrix = [];
-    dataCompare.rightCompareMatrix = [];
+    //dataCompare.leftCompareMatrix = [];
+    //dataCompare.rightCompareMatrix = [];
+    
+    dataCompare.compareMatrix = [];
     
     dataCompare.leftMissingMatrix = [];
     dataCompare.rightMissingMatrix = [];
@@ -65,16 +67,25 @@ app.controller('DataCompare', ['DataProcessing',function(DataProcessing){
         DataProcessing.compareMatrices(dataCompare.leftDataMatrix, dataCompare.rightDataMatrix).then(function (comparison) {
             var leftMissing = comparison.missingFromMatrixB;
             var rightMissing = comparison.missingFromMatrixA;
-            var leftCompare = [];
-            var rightCompare = [];
+            //var leftCompare = [];
+            //var rightCompare = [];
+            var compare = [];
 
             for(var i = 0; i < comparison.difference.length; i++){
-                leftCompare.push(comparison.difference[i].a);
-                rightCompare.push(comparison.difference[i].b);
+
+                compare.push({
+                    a : comparison.difference[i].a,
+                    b : comparison.difference[i].b,
+                    d : comparison.difference[i].d
+                });
+                //leftCompare.push(comparison.difference[i].a);
+                //rightCompare.push(comparison.difference[i].b);
             }
 
-            dataCompare.leftCompareMatrix = leftCompare;
-            dataCompare.rightCompareMatrix = rightCompare;
+            //dataCompare.leftCompareMatrix = leftCompare;
+            //dataCompare.rightCompareMatrix = rightCompare;
+
+            dataCompare.compareMatrix = compare;
 
             dataCompare.leftMissingMatrix = leftMissing;
             dataCompare.rightMissingMatrix = rightMissing;
