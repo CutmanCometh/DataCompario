@@ -48,7 +48,8 @@ table {
 /** KEYS **/
 html, body {
   width: 100%;
-  margin: 0; }
+  margin: 0;
+  background-color: #f6f6f6; }
 
 h1 {
   font-size: 4em;
@@ -71,13 +72,14 @@ h1 {
   padding: 0; }
 
 .dataTable {
-  margin: 20px auto 0 auto;
+  margin: 40px auto 0 auto;
   transition: all linear 5.0s;
-  width: 95%; }
+  width: 95%;
+  padding: 0 10px; }
   .dataTable tr.even {
-    background-color: #f8f8f8; }
+    background-color: #eee; }
   .dataTable tr.odd {
-    background-color: #fff; }
+    background-color: #ddd; }
   .dataTable td {
     border: 1px solid rgba(0, 0, 0, 0.2);
     padding: 4px 3px 0px 5px;
@@ -94,24 +96,48 @@ h1 {
   .dataTable td.string {
     color: #622; }
 
+thead th, tfoot th {
+  padding: 5px;
+  background-color: #fff; }
+
+thead {
+  font-size: 1.2em;
+  font-weight: 500; }
+
 /*.dataTable.ng-hide{
   opacity:0;
 }*/
 .dataColumn {
-  width: 50%;
-  margin: 0; }
-  .dataColumn .dataTextArea {
-    margin: 0 auto;
-    display: block;
-    width: 99.5%;
-    height: 130px;
-    resize: none; }
+  width: 49%;
+  /*margin: 0;*/ }
+
+.dataTextArea {
+  margin: 0 auto;
+  display: block;
+  height: 130px;
+  resize: none;
+  width: 98%; }
 
 .dataColumn.leftData {
   float: left; }
 
 .dataColumn.rightData {
   float: right; }
+
+table.dataTable {
+  border: 1px solid rgba(0, 0, 0, 0.2); }
+
+.dataColumn {
+  width: 50%; }
+
+.leftData .dataTextArea {
+  margin-left: 1%; }
+
+.rightData .dataTextArea {
+  margin-right: 1%; }
+
+em {
+  font-style: italic; }
 
 @media screen and (min-width: 1600px) {
   /*.container{

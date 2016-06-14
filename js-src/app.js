@@ -6,6 +6,9 @@
 // @codekit-append "lib/angular/angular.js"
 // @codekit-append "lib/angular/angular-mocks"
 
+/*CLIPBOARD*/
+// @codekit-append "lib/clipboard/clipboard.js"
+
 /*PROJECT FILES*/
 // @codekit-append "app/config.js"
 
@@ -20,3 +23,6 @@
 
 /*CONTROLLERS*/
 // @codekit-append "app/controllers/DataCompare.js"
+
+/*TO LOAD THE CLIPBOARD.JS FUNCTIONALITY*/
+// @codekit-append "app/misc/clipboardLoad.js"

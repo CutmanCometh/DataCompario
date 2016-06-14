@@ -1,6 +1,7 @@
 html, body{
   width: 100%;
   margin:0;
+  background-color: $color-universal-bg;
 }
 
 h1 {
@@ -27,9 +28,10 @@ h1 {
 }
 
 .dataTable{
-  margin: 20px auto 0 auto;
+  margin: 40px auto 0 auto;
   transition: all linear 5.0s;
   width:95%;
+  padding: 0 10px;
 
   tr.even{
     background-color: $color-even-rows;
@@ -40,7 +42,7 @@ h1 {
   }
 
   td{
-    border: 1px solid rgba(0,0,0,.2);
+    border: $border-table;
     padding: 4px 3px 0px 5px;
     vertical-align: middle;
   }
@@ -64,21 +66,33 @@ h1 {
     color: $color-string-value;
   }
 }
+
+thead, tfoot{
+  th {
+    padding: 5px;
+    background-color: $color-table-meta;
+  }
+}
+thead{
+  font-size: 1.2em;
+  font-weight: 500;
+}
 /*.dataTable.ng-hide{
   opacity:0;
 }*///TODO animate the data tables in an out
 
 .dataColumn{
-  width: 50%;
-  margin: 0;
+  width: 49%;
+  /*margin: 0;*/
 
-  .dataTextArea{
-    margin: 0 auto;
-    display: block;
-    width: 99.5%;
-    height:130px;
-    resize: none;
-  }
+
+}
+.dataTextArea{
+  margin: 0 auto;
+  display: block;
+  height:130px;
+  resize: none;
+  width: 98%;
 }
 
 .dataColumn.leftData{
@@ -87,4 +101,26 @@ h1 {
 
 .dataColumn.rightData{
   float : right;
+}
+
+table.dataTable{
+  border: $border-table;
+}
+
+.dataColumn{
+  width: 50%;
+}
+
+.leftData .dataTextArea {
+  margin-left: 1%;
+}
+
+.rightData .dataTextArea {
+  margin-right: 1%;
+}
+
+
+
+em{
+  font-style: italic;
 }

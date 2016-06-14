@@ -15,7 +15,7 @@ app.controller('DataCompare', ['DataProcessing',function(DataProcessing){
     
     dataCompare.leftDataMatrix = [
         /*[1, "foo", true],
-        [2, "bar", false]
+        [2, "bar", false]*/
     ];
 
     dataCompare.rightDataMatrix = [
@@ -35,6 +35,13 @@ app.controller('DataCompare', ['DataProcessing',function(DataProcessing){
             dataCompare.leftDataMatrix = dataMatrix;
             dataCompare.processingLeftData = false;
             //console.log("elements in leftDataMatrix: " + dataCompare.leftDataMatrix.length + "\nelements in first row: " + dataCompare.leftDataMatrix[0].length);
+
+            if(dataCompare.leftDataMatrix.length > 0 && dataCompare.rightDataMatrix.length > 0){
+                dataCompare.compareMatrices();
+            }
+            else {
+                dataCompare.clearComparisonData();
+            }//TODO this block is copy and pasted from DataCompare.rebuildRightDataMatrix. factor it into its own method
         });
     };
 
@@ -49,7 +56,7 @@ app.controller('DataCompare', ['DataProcessing',function(DataProcessing){
             }
             else {
                 dataCompare.clearComparisonData();
-            }
+            }//TODO this block is copy and pasted from DataCompare.rebuildLeftDataMatrix. factor it into its own method
             //console.log("elements in rightDataMatrix: " + dataCompare.rightDataMatrix.length + "\nelements in first row: " + dataCompare.rightDataMatrix[0].length);
         });
     };
