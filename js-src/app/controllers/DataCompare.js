@@ -127,4 +127,26 @@ app.controller('DataCompare', ['DataProcessing',function(DataProcessing){
     //TODO column sorting
     //TODO move business logic to a service
     //TODO make processing asynchrous
+
+    dataCompare.zeroPadDigits = 5;
+
+    dataCompare.zeroPadText = '';
+    dataCompare.numberOfFixedValues = 0;
+    dataCompare.numberOfFoundValues = 0;
+
+    dataCompare.zeroPadIt = function (zeroPadText) {
+        if(!zeroPadText.length)
+            return;
+        var fixed = 0;
+        var regEx = new RegExp('\\b\\d{1,' + dataCompare.zeroPadDigits + '}\\b', 'g');
+        dataCompare.numberOfFoundValues = zeroPadText.match(regEx).length;
+        dataCompare.zeroPadText = zeroPadText.replace(regEx, function(match){
+            if(match.length < +dataCompare.zeroPadDigits){
+                fixed++;
+                return new Array(+dataCompare.zeroPadDigits - match.length).fill('0').join('') + match;
+            }
+            return match;
+        });
+        dataCompare.numberOfFixedValues = fixed;
+    }
 }]);

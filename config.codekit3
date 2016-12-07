@@ -67,12 +67,6 @@
 		"oF": 0,
 		"oS": 0
 		},
-	"\/css\/screen.css.map": {
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/css\/screen.css.map",
-		"oF": 0
-		},
 	"\/images\/up-caret.svg": {
 		"ft": 2097152,
 		"miP": 0,
@@ -91,7 +85,7 @@
 		},
 	"\/js-src\/app.js": {
 		"ft": 64,
-		"mi": 0,
+		"mi": 1,
 		"oA": 0,
 		"oAP": "\/js\/app-min.js",
 		"oF": 2,
@@ -504,12 +498,6 @@
 		"sC": 1,
 		"tS": 0
 		},
-	"\/js\/app-min.js.map": {
-		"ft": 8192,
-		"oA": 2,
-		"oAP": "\/js\/app-min.js.map",
-		"oF": 0
-		},
 	"\/sass\/.sass-cache\/10e9e1512faed5fcd452cb050881c57a881aa946\/screen.scssc": {
 		"ft": 8192,
 		"oA": 2,
@@ -552,11 +540,11 @@
 		"dP": 10,
 		"dS": 0,
 		"ft": 4,
-		"ma": 1,
+		"ma": 0,
 		"oA": 0,
 		"oAP": "\/css\/screen.css",
 		"oF": 0,
-		"oS": 0,
+		"oS": 3,
 		"uL": 1
 		},
 	"\/sass\/src\/.sass-cache\/a5ddceff9fdd9e5338215fe234d83a58572a96c3\/static.scssc": {

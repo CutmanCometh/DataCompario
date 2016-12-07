@@ -8,7 +8,7 @@
     <body ng-controller="DataCompare as dataCompare">
         <div class="container">
             <h1>DataCompar<sub>e</sub>io</h1>
-            <div class="compare-container">
+            <div class="compare-container section-container">
                 <h2>Compare Data</h2>
                 <button class="clear-data-button" ng-click="dataCompare.clearData()" ng-show="dataCompare.leftDataText.length||dataCompare.rightDataText.length">Clear Data</button>
                 <div class="leftData dataColumn">
@@ -193,6 +193,21 @@
                         </tfoot>
                     </table>
                 </div>
+                <div class="clearfix"></div>
+            </div>
+            <div class="pad-container section-container">
+                <h2>Zero-pad</h2>
+                <fieldset class="pad-controls">
+                    <label>
+                        Zero-pad to <input type="number" min="1" max="2000000000" step="1" ng-model="dataCompare.zeroPadDigits"> digits
+                        <button ng-click="dataCompare.zeroPadIt(dataCompare.zeroPadText)">Zero pad it</button>
+                    </label>
+                    <label ng-show="dataCompare.numberOfFixedValues && dataCompare.numberOfFoundValues">
+                        Zero-padded {{dataCompare.numberOfFixedValues}} of {{dataCompare.numberOfFoundValues}} values ({{dataCompare.numberOfFoundValues - dataCompare.numberOfFixedValues}} already padded)
+                    </label>
+
+                </fieldset>
+                <textarea class="pad-textarea" placeholder="Some text to pad" ng-model="dataCompare.zeroPadText"></textarea>
             </div>
         </div>
         <script src="js/app-min.js"></script>

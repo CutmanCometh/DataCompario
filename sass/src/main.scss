@@ -103,6 +103,19 @@ thead{
   opacity:0;
 }*///TODO animate the data tables in an out
 
+.clearfix{
+  overflow: auto;
+  clear: both;
+}
+
+.section-container{
+  clear: both;
+  margin-top: 30px;
+}
+.section-container:first-child{
+  margin-top:0;
+}
+
 .clear-data-button{
   display: block;
   margin: 0 auto 5px auto;
@@ -149,7 +162,23 @@ table.dataTable{
   margin-right: 1%;
 }
 
+.pad-controls{
+  display: block;
+  width: auto;
+  margin: 0 0 0 25px;
+}
+.pad-controls label{
+  display: block;
+  margin: 0 0 5px 0;
+}
 
+.pad-textarea{
+  margin: 0 auto;
+  display: block;
+  height: 200px;
+  width: 98%;
+  resize: none;
+}
 
 em{
   font-style: italic;
