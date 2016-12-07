@@ -204,6 +204,7 @@ DataMatrix.compareMatrices = function(matrixA, primaryKeyColumnA, matrixB, prima
 
 DataMatrix.getRowDifferenceMask = function (rowA, rowB) {
     if(rowA.length !== rowB.length){
+        console.log(rowA, rowB);
         throw new Error("DataMatrix.getRowDifferenceMask can only compare rows containing the same number of values");
     }
     var difference = new Array(rowA.length);

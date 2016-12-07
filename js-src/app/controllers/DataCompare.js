@@ -4,6 +4,13 @@ app.controller('DataCompare', ['DataProcessing',function(DataProcessing){
     dataCompare.processingLeftData = false;
     dataCompare.processingRightData = false;
 
+    dataCompare.clearData = function(){
+        dataCompare.leftDataText = dataCompare.rightDataText = '';
+        dataCompare.rebuildLeftDataMatrix('');
+        dataCompare.rebuildRightDataMatrix('');
+        dataCompare.clearComparisonData();
+    };
+
     /**
      * How many rows of data to show in the primary data table
      * @type {number}

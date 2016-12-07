@@ -103,6 +103,11 @@ thead{
   opacity:0;
 }*///TODO animate the data tables in an out
 
+.clear-data-button{
+  display: block;
+  margin: 0 auto 5px auto;
+}
+
 .dataColumn{
   width: 49%;
   //max-width: 49%;
@@ -121,6 +126,7 @@ thead{
 
 .dataColumn.leftData{
   float : left;
+  clear: both;
 }
 
 .dataColumn.rightData{

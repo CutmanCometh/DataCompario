@@ -8,204 +8,192 @@
     <body ng-controller="DataCompare as dataCompare">
         <div class="container">
             <h1>DataCompar<sub>e</sub>io</h1>
-            <h2>A simple tool for comparing two similar datasets to find discrepancies</h2>
-            <div class="intro">A few constraints on your data (we're working on fixes and UX improvements):
-                <ul>
-                    <li class="li">You must have a unique identifier, and it must be in the first column.</li>
-                    <li class="li">Both datasets must have the same number of columns in each and every row.</li>
-                    <li class="li">The columns have to be in the same order, or else the comparison won't work.</li>
-                    <li class="li">Rows must be separated by a newline (unix or windows, doesn't matter), and values
-                        within a row should be separated by tabs.
-                    </li>
-                </ul>
+            <div class="compare-container">
+                <h2>Compare Data</h2>
+                <button class="clear-data-button" ng-click="dataCompare.clearData()" ng-show="dataCompare.leftDataText.length||dataCompare.rightDataText.length">Clear Data</button>
+                <div class="leftData dataColumn">
+
+                    <textarea placeholder="Data goes in here" class="dataTextArea" name="leftDataTextArea"
+                              id="leftDataTextArea" ng-model="dataCompare.leftDataText"
+                              ng-change="dataCompare.rebuildLeftDataMatrix(dataCompare.leftDataText)"></textarea>
+
+                    <table class="dataTable"
+                           ng-show="dataCompare.compareMatrix.length > 0">
+                        <thead>
+                            <tr>
+                                <th colspan="{{dataCompare.compareMatrix[0].a.length}}">Rows that have different values
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="leftCompareBody">
+                            <tr ng-repeat="compareRow in dataCompare.compareMatrix | limitTo: dataCompare.mainTableRows"
+                                ng-class="$index % 2 === 0 ? 'even' : 'odd'"><!--TODO add custom sorting function for compare rows-->
+                                <td ng-repeat="leftCompareValue in compareRow.a track by $index"
+                                    class="{{dataCompare.getType(leftCompareValue)}} ng-class: {'different' : compareRow.d[$index]}">
+                                    {{leftCompareValue}}
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="{{dataCompare.compareMatrix[0].a.length}}">Showing up to
+                                    {{dataCompare.mainTableRows}} out of {{dataCompare.compareMatrix.length}} records.
+                                    <button class="clipboard" data-clipboard-action="copy"
+                                            data-clipboard-target="#leftCompareBody">Copy them <em>all</em> to the clipboard
+                                    </button>
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+
+                    <table class="dataTable"
+                           ng-show="dataCompare.leftMissingMatrix.length > 0 || dataCompare.rightMissingMatrix.length > 0">
+                        <thead>
+                            <tr>
+                                <th colspan="{{dataCompare.leftMissingMatrix[0].length}}">Rows that are present in this
+                                    dataset,
+                                    but absent in the other
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="leftMissingBody">
+                            <tr ng-repeat="leftMissingRow in dataCompare.leftMissingMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows"
+                                ng-class="$index % 2 === 0 ? 'even' : 'odd'">
+                                <td ng-repeat="leftMissingValue in leftMissingRow track by $index"
+                                    ng-class="dataCompare.getType(leftMissingValue)">{{leftMissingValue}}
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="{{dataCompare.leftMissingMatrix[0].length}}">Showing up to
+                                    {{dataCompare.mainTableRows}} out of {{dataCompare.leftMissingMatrix.length}} records
+                                    <button class="clipboard" data-clipboard-target="#leftMissingBody">Copy them
+                                        <em>all</em> to the clipboard
+                                    </button>
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+
+                    <table ng-show="dataCompare.leftDataMatrix.length > 0"
+                           class="leftDataTable dataTable">
+                        <thead>
+                            <tr>
+                                <th colspan="{{dataCompare.leftDataMatrix[0].length}}">All the data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="leftRow in dataCompare.leftDataMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows"
+                                ng-class="$index % 2 === 0 ? 'even' : 'odd'">
+                                <td ng-repeat="leftValue in leftRow track by $index"
+                                    ng-class="dataCompare.getType(leftValue)">
+                                    {{leftValue}}
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="{{dataCompare.leftDataMatrix[0].length}}">Showing up to
+                                    {{dataCompare.mainTableRows}} out of {{dataCompare.leftDataMatrix.length}} records
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+
+                </div>
+
+                <div class="rightData dataColumn">
+                    <textarea placeholder="Also here" class="dataTextArea" name="rightDataTextArea"
+                              id="rightDataTextArea" ng-model="dataCompare.rightDataText"
+                              ng-change="dataCompare.rebuildRightDataMatrix(dataCompare.rightDataText)"></textarea>
+
+                    <table class="dataTable"
+                           ng-show="dataCompare.compareMatrix.length > 0">
+                        <thead>
+                            <tr>
+                                <th colspan="{{dataCompare.compareMatrix[0].a.length}}">Rows that have different values
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="rightCompareBody">
+                            <tr ng-repeat="compareRow in dataCompare.compareMatrix | limitTo: dataCompare.mainTableRows"
+                                ng-class="$index % 2 === 0 ? 'even' : 'odd'">
+                                <td ng-repeat="rightCompareValue in compareRow.b track by $index"
+                                    class="{{dataCompare.getType(rightCompareValue)}} ng-class: {'different' : compareRow.d[$index]}">
+                                    {{rightCompareValue}}
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="{{dataCompare.compareMatrix[0].a.length}}">Showing up to
+                                    {{dataCompare.mainTableRows}} out of {{dataCompare.compareMatrix.length}} records
+                                    <button class="clipboard" data-clipboard-target="#rightCompareBody">Copy them
+                                        <em>all</em> to the clipboard
+                                    </button>
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <table class="dataTable"
+                           ng-show="dataCompare.leftMissingMatrix.length > 0 || dataCompare.rightMissingMatrix.length > 0">
+                        <thead>
+                            <tr>
+                                <th colspan="{{dataCompare.rightMissingMatrix[0].length}}">Rows that are present in this
+                                    dataset, but absent in the other
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="rightMissingBody">
+                            <tr ng-repeat="rightMissingRow in dataCompare.rightMissingMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows"
+                                ng-class="$index % 2 === 0 ? 'even' : 'odd'">
+                                <td ng-repeat="rightMissingValue in rightMissingRow track by $index"
+                                    ng-class="dataCompare.getType(rightMissingValue)">{{rightMissingValue}}
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="{{dataCompare.rightMissingMatrix[0].length}}">Showing up to
+                                    {{dataCompare.mainTableRows}} out of {{dataCompare.rightMissingMatrix.length}} records
+                                    <button class="clipboard" data-clipboard-target="#rightMissingBody">Copy them
+                                        <em>all</em> to the clipboard
+                                    </button>
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+                    <table ng-show="dataCompare.rightDataMatrix.length > 0"
+                           class="rightDataTable dataTable">
+                        <thead>
+                            <tr>
+                                <th colspan="{{dataCompare.rightDataMatrix[0].length}}">All the data</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="rightRow in dataCompare.rightDataMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows"
+                                ng-class="$index % 2 === 0 ? 'even' : 'odd'">
+                                <td ng-repeat="rightValue in rightRow track by $index"
+                                    ng-class="dataCompare.getType(rightValue)">{{rightValue}}
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th colspan="{{dataCompare.rightDataMatrix[0].length}}">Showing up to
+                                    {{dataCompare.mainTableRows}} out of {{dataCompare.rightDataMatrix.length}} records
+                                </th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
             </div>
-
-            <!--TODO add user sorting by clicking table headers-->
-            <!--TODO add setting allowing user to pick how many rows to show-->
-
-            <div class="leftData dataColumn">
-
-                <textarea placeholder="Data goes in here" class="dataTextArea" name="leftDataTextArea"
-                          id="leftDataTextArea" ng-model="dataCompare.leftDataText"
-                          ng-change="dataCompare.rebuildLeftDataMatrix(dataCompare.leftDataText)"></textarea>
-
-                <table class="dataTable"
-                       ng-show="dataCompare.compareMatrix.length > 0">
-                    <thead>
-                        <tr>
-                            <th colspan="{{dataCompare.compareMatrix[0].a.length}}">Rows that have different values
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="leftCompareBody">
-                        <tr ng-repeat="compareRow in dataCompare.compareMatrix | limitTo: dataCompare.mainTableRows"
-                            ng-class="$index % 2 === 0 ? 'even' : 'odd'"><!--TODO add custom sorting function for compare rows-->
-                            <td ng-repeat="leftCompareValue in compareRow.a track by $index"
-                                class="{{dataCompare.getType(leftCompareValue)}} ng-class: {'different' : compareRow.d[$index]}">
-                                {{leftCompareValue}}
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="{{dataCompare.compareMatrix[0].a.length}}">Showing up to
-                                {{dataCompare.mainTableRows}} out of {{dataCompare.compareMatrix.length}} records.
-                                <button class="clipboard" data-clipboard-action="copy"
-                                        data-clipboard-target="#leftCompareBody">Copy them <em>all</em> to the clipboard
-                                </button>
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
-
-
-                <table class="dataTable"
-                       ng-show="dataCompare.leftMissingMatrix.length > 0 || dataCompare.rightMissingMatrix.length > 0">
-                    <thead>
-                        <tr>
-                            <th colspan="{{dataCompare.leftMissingMatrix[0].length}}">Rows that are present in this
-                                dataset,
-                                but absent in the other
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="leftMissingBody">
-                        <tr ng-repeat="leftMissingRow in dataCompare.leftMissingMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows"
-                            ng-class="$index % 2 === 0 ? 'even' : 'odd'">
-                            <td ng-repeat="leftMissingValue in leftMissingRow track by $index"
-                                ng-class="dataCompare.getType(leftMissingValue)">{{leftMissingValue}}
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="{{dataCompare.leftMissingMatrix[0].length}}">Showing up to
-                                {{dataCompare.mainTableRows}} out of {{dataCompare.leftMissingMatrix.length}} records
-                                <button class="clipboard" data-clipboard-target="#leftMissingBody">Copy them
-                                    <em>all</em> to the clipboard
-                                </button>
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
-
-
-                <table ng-show="dataCompare.leftDataMatrix.length > 0"
-                       class="leftDataTable dataTable">
-                    <thead>
-                        <tr>
-                            <th colspan="{{dataCompare.leftDataMatrix[0].length}}">All the data</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="leftRow in dataCompare.leftDataMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows"
-                            ng-class="$index % 2 === 0 ? 'even' : 'odd'">
-                            <td ng-repeat="leftValue in leftRow track by $index"
-                                ng-class="dataCompare.getType(leftValue)">
-                                {{leftValue}}
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="{{dataCompare.leftDataMatrix[0].length}}">Showing up to
-                                {{dataCompare.mainTableRows}} out of {{dataCompare.leftDataMatrix.length}} records
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
-
-
-            </div>
-
-            <div class="rightData dataColumn">
-                <textarea placeholder="Also here" class="dataTextArea" name="rightDataTextArea"
-                          id="rightDataTextArea" ng-model="dataCompare.rightDataText"
-                          ng-change="dataCompare.rebuildRightDataMatrix(dataCompare.rightDataText)"></textarea>
-
-                <table class="dataTable"
-                       ng-show="dataCompare.compareMatrix.length > 0">
-                    <thead>
-                        <tr>
-                            <th colspan="{{dataCompare.compareMatrix[0].a.length}}">Rows that have different values
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="rightCompareBody">
-                        <tr ng-repeat="compareRow in dataCompare.compareMatrix | limitTo: dataCompare.mainTableRows"
-                            ng-class="$index % 2 === 0 ? 'even' : 'odd'">
-                            <td ng-repeat="rightCompareValue in compareRow.b track by $index"
-                                class="{{dataCompare.getType(rightCompareValue)}} ng-class: {'different' : compareRow.d[$index]}">
-                                {{rightCompareValue}}
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="{{dataCompare.compareMatrix[0].a.length}}">Showing up to
-                                {{dataCompare.mainTableRows}} out of {{dataCompare.compareMatrix.length}} records
-                                <button class="clipboard" data-clipboard-target="#rightCompareBody">Copy them
-                                    <em>all</em> to the clipboard
-                                </button>
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
-
-                <table class="dataTable"
-                       ng-show="dataCompare.leftMissingMatrix.length > 0 || dataCompare.rightMissingMatrix.length > 0">
-                    <thead>
-                        <tr>
-                            <th colspan="{{dataCompare.rightMissingMatrix[0].length}}">Rows that are present in this
-                                dataset, but absent in the other
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody id="rightMissingBody">
-                        <tr ng-repeat="rightMissingRow in dataCompare.rightMissingMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows"
-                            ng-class="$index % 2 === 0 ? 'even' : 'odd'">
-                            <td ng-repeat="rightMissingValue in rightMissingRow track by $index"
-                                ng-class="dataCompare.getType(rightMissingValue)">{{rightMissingValue}}
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="{{dataCompare.rightMissingMatrix[0].length}}">Showing up to
-                                {{dataCompare.mainTableRows}} out of {{dataCompare.rightMissingMatrix.length}} records
-                                <button class="clipboard" data-clipboard-target="#rightMissingBody">Copy them
-                                    <em>all</em> to the clipboard
-                                </button>
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
-
-                <table ng-show="dataCompare.rightDataMatrix.length > 0"
-                       class="rightDataTable dataTable">
-                    <thead>
-                        <tr>
-                            <th colspan="{{dataCompare.rightDataMatrix[0].length}}">All the data</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr ng-repeat="rightRow in dataCompare.rightDataMatrix | orderBy:'0' | limitTo: dataCompare.mainTableRows"
-                            ng-class="$index % 2 === 0 ? 'even' : 'odd'">
-                            <td ng-repeat="rightValue in rightRow track by $index"
-                                ng-class="dataCompare.getType(rightValue)">{{rightValue}}
-                            </td>
-                        </tr>
-                    </tbody>
-                    <tfoot>
-                        <tr>
-                            <th colspan="{{dataCompare.rightDataMatrix[0].length}}">Showing up to
-                                {{dataCompare.mainTableRows}} out of {{dataCompare.rightDataMatrix.length}} records
-                            </th>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
-
         </div>
         <script src="js/app-min.js"></script>
         <script>

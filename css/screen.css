@@ -123,6 +123,10 @@ thead {
 /*.dataTable.ng-hide{
   opacity:0;
 }*/
+.clear-data-button {
+  display: block;
+  margin: 0 auto 5px auto; }
+
 .dataColumn {
   width: 49%;
   /*margin: 0;*/ }
@@ -135,7 +139,8 @@ thead {
   width: 98%; }
 
 .dataColumn.leftData {
-  float: left; }
+  float: left;
+  clear: both; }
 
 .dataColumn.rightData {
   float: right; }
@@ -163,6 +168,7 @@ em {
   .dataColumn{
     width: 800px;
   }*/ }
+
 @media screen and (min-width: 2500px) {
   /*.container{
     width:2500px;
